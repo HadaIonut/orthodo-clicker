@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+canvas.cube {
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    position: relative;
+    -webkit-animation: mymove 5s infinite; /* Safari 4.0 - 8.0 */
+    animation: mymove 0.67s infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+#div1 {-webkit-animation-timing-function: linear;}
+#div2 {-webkit-animation-timing-function: ease;}
+#div3 {-webkit-animation-timing-function: ease-in;}
+#div4 {-webkit-animation-timing-function: ease-out;}
+#div5 {-webkit-animation-timing-function: ease-in-out;}
+
+/* Standard syntax */
+#div1 {animation-timing-function: linear;}
+#div2 {animation-timing-function: ease;}
+#div3 {animation-timing-function: ease-in;}
+#div4 {animation-timing-function: ease-out;}
+#div5 {animation-timing-function: ease-in-out;}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+    from {left: random(100); top: 0px;}
+    to {left: random(100); top: 100%;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    from {top: 0px;}
+    to {top: 500px;}
+}
+
+</style>
+<div class="row">
+  <div class="col-sm-12">
+    {{docs|markdown}}
+  </div>
+</div>
+<div>
+    <canvas class="cube" id="div2"> </canvas>
+    <canvas class="cube" id="div3"> </canvas>
+    <canvas class="cube" id="div1"> </canvas>
+    <canvas class="cube" id="div4"> </canvas>
+    <canvas class="cube" id="div5"> </canvas>
+    <canvas class="cube" id="div2"> </canvas>
+    <canvas class="cube" id="div3"> </canvas>
+    <canvas class="cube" id="div1"> </canvas>
+    <canvas class="cube" id="div4"> </canvas>
+    <canvas class="cube" id="div5"> </canvas>
+    <canvas class="cube" id="div2"> </canvas>
+    <canvas class="cube" id="div3"> </canvas>
+    <canvas class="cube" id="div1"> </canvas>
+    <canvas class="cube" id="div4"> </canvas>
+    <canvas class="cube" id="div5"> </canvas>
+</div>
+<div id="contacts"></div>
+    <script src="js/compiled/orthodocljs.js" type="text/javascript"></script>
+{% endblock %}
