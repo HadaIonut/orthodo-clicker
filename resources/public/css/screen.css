@@ -30,7 +30,7 @@ body {
   .navbar-nav .nav-link + .nav-link {
     margin-left: 1rem;
   }
-  .ButtonPos{
+  .Generator{
 	  position: relative;
 	  left: 105px;
 	  top: 250px;

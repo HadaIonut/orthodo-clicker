@@ -21,14 +21,17 @@
 
 (defonce app-state
     (atom {}))
-
+;;make a state that will keep the number of orthodo-coins that
+;;will be updated at every click
 (defn root-comp [state owner]
     (reify
         om/IRender
         (render [this]
-            (dom/button #js
-                {:onClick (fn [e] (println "hi"))
-                  :className "ButtonPos"} "Say hi"))))
+            (dom/div nil
+                (dom/div nil "hello")
+                (dom/button #js
+                    {:onClick (fn [e] (println "hi"))
+                     :className "Generator"} "Say hi")))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "contacts"))})
