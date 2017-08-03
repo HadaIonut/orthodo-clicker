@@ -33,6 +33,13 @@ body {
   .Generator{
 	  position: relative;
 	  left: 105px;
-	  top: 250px;
+	  top: 225px;
+  }
+  .coinsGenerated{
+	  font-size: 200%;
+	  text-indent: 60px;
+	  color: #BDC194;
+	  text-shadow: -3px 2px #383838;
+	  font: Arial;
   }
 }

@@ -19,16 +19,26 @@
 (defn error-handler [{:keys [status status-text]}]
   (.log js/console (str "something bad happened: " status " " status-text)))
 
+(defn say [state]
+    (reify
+        om/IRender
+        (render [this]
+            (dom/p #js
+                {:className "coinsGenerated"} state))))
+
+
 (defonce app-state
-    (atom {}))
-;;make a state that will keep the number of orthodo-coins that
-;;will be updated at every click
+    (atom {:coins [0]
+           :modifiers
+           [{:coinMod 1}
+            {:clickers 0}]}))
+
 (defn root-comp [state owner]
     (reify
         om/IRender
         (render [this]
             (dom/div nil
-                (dom/div nil "hello")
+                (dom/div nil (om/build-all say (:coins state)))
                 (dom/button #js
                     {:onClick (fn [e] (println "hi"))
                      :className "Generator"} "Say hi")))))
