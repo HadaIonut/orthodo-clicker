@@ -19,28 +19,29 @@
 (defn error-handler [{:keys [status status-text]}]
   (.log js/console (str "something bad happened: " status " " status-text)))
 
-(defn say [state]
-    (reify
-        om/IRender
-        (render [this]
-            (dom/p #js
-                {:className "coinsGenerated"} state))))
-
+(defn add [state]
+    (let [{coins :coins} state]
+        (println coins)
+        (+ 1 coins)))
 
 (defonce app-state
-    (atom {:coins [0]
+    (atom {:coins 0
            :modifiers
            [{:coinMod 1}
             {:clickers 0}]}))
+
+(defn manualGen [state]
+    (om/update! state :coins (add state)))
 
 (defn root-comp [state owner]
     (reify
         om/IRender
         (render [this]
             (dom/div nil
-                (dom/div nil (om/build-all say (:coins state)))
+                (dom/p #js
+                    {:className "coinsGenerated"} (:coins state))
                 (dom/button #js
-                    {:onClick (fn [e] (println "hi"))
+                    {:onClick (fn [e] (manualGen state))
                      :className "Generator"} "Say hi")))))
 
   (om/root root-comp app-state

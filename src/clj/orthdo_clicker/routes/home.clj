@@ -11,7 +11,7 @@
   (db/create-db
     (db/mysql {:db "ionut"
                :user "root"
-               :password "whitecityromania"
+               :password ""
                :host "172.17.0.2"
                :port "3306"})))
 
