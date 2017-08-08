@@ -21,8 +21,7 @@
                  [korma "0.4.3"]
                  [mysql/mysql-connector-java "5.1.40"]
                  [org.clojure/clojure "1.8.0"]
-                 [org.clojure/core.async  "0.3.442"
-                 :exclusions [org.clojure/tools.reader]]
+                 [org.clojure/core.async "0.3.443"]
                  [org.clojure/tools.cli "0.3.5"]
                  [org.clojure/tools.logging "0.4.0"]
                  [org.clojure/clojurescript "1.9.854"]

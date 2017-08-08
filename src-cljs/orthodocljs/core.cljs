@@ -24,25 +24,65 @@
         (println coins)
         (+ 1 coins)))
 
+(defn stateMenu [state]
+    (let [{menu :menu} state]
+        (println menu)
+        (string/replace menu #"false" "true")))
+
+(defn stateShop [state]
+    (let [{menu :menu} state]
+        (println menu)
+        (string/replace menu #"true" "false")))
+
 (defonce app-state
     (atom {:coins 0
            :modifiers
            [{:coinMod 1}
-            {:clickers 0}]}))
+            {:clickers 0}]
+           :menu "true"}))
 
 (defn manualGen [state]
     (om/update! state :coins (add state)))
 
+(defn displayManu [state]
+    (om/update! state :menu (stateMenu state)))
+
+(defn displayShop [state]
+    (om/update! state :menu (stateShop state)))
+
 (defn root-comp [state owner]
     (reify
+        om/IWillMount
+        (will-mount [this]
+            (dom/div #js
+                {:id "btn1"
+                 :className "tab-pane fade in active"}
+                 (dom/p "hello")))
         om/IRender
         (render [this]
-            (dom/div nil
+        (dom/div #js
+            {:className "col-md-12"}
+            (dom/div #js
+                {:className "col-md-4"}
                 (dom/p #js
                     {:className "coinsGenerated"} (:coins state))
                 (dom/button #js
                     {:onClick (fn [e] (manualGen state))
-                     :className "Generator"} "Say hi")))))
+                     :className "Generator"} "Say hi"))
+            (dom/div #js
+                {:className "col-md-2"})
+            (dom/div #js
+                {:className "col-md-6 btn-poz"}
+            (dom/div #js
+                {:className "btn-group"}
+                (dom/button #js
+                    {:type "button"
+                     :className "btn btn-default buttonColor"
+                     :onClick (fn [e] (displayManu state))} "Menu")
+                (dom/button #js
+                    {:type "button"
+                     :className "btn btn-default buttonColor"
+                     :onClick (fn [e] (displayShop state))} "Shop")))))))
 
   (om/root root-comp app-state
-    {:target (. js/document (getElementById "contacts"))})
+    {:target (. js/document (getElementById "Coins"))})

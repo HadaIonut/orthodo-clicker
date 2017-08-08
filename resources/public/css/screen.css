@@ -37,9 +37,25 @@ body {
   }
   .coinsGenerated{
 	  font-size: 200%;
-	  text-indent: 60px;
+	  text-indent: 50px;
 	  color: #BDC194;
 	  text-shadow: -3px 2px #383838;
 	  font: Arial;
+  }
+  .container1{
+	  padding-top: 10px;
+	  padding-left: 20px;
+	  padding-right: 20px;
+  }
+  .buttonColor{
+	  background-color:#939393;
+	  border-style: solid;
+	  border-color: black;
+	  font-size: 150%;
+	  padding-left: 75px;
+	  padding-right: 75px;
+  }
+  .btn-poz{
+	  padding-top: 30px
   }
 }

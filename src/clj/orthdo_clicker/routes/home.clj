@@ -5,13 +5,14 @@
             [environ.core :refer [env]]
             [korma.db :as db]
             [korma.core :refer :all :rename {update sql-update}]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [environ.core :refer [env]]))
 
 (def debe
   (db/create-db
     (db/mysql {:db "ionut"
                :user "root"
-               :password ""
+               :password (env :db-pass)
                :host "172.17.0.2"
                :port "3306"})))
 
@@ -21,7 +22,6 @@
 (select BIGBOI)
 
 (defn home-page []
-    (println (select BIGBOI (fields :name :message)))
   (selmer.parser/render-file "home.html" {:params "test"}))
 
 (defn about-page []
