@@ -21,17 +21,14 @@
 
 (defn add [state]
     (let [{coins :coins} state]
-        (println coins)
         (+ 1 coins)))
 
 (defn stateMenu [state]
     (let [{menu :menu} state]
-        (println menu)
         (string/replace menu #"false" "true")))
 
 (defn stateShop [state]
     (let [{menu :menu} state]
-        (println menu)
         (string/replace menu #"true" "false")))
 
 (defonce app-state
@@ -69,8 +66,10 @@
                 (dom/button #js
                     {:onClick (fn [e] (manualGen state))
                      :className "Generator"} "Say hi"))
+
             (dom/div #js
                 {:className "col-md-2"})
+
             (dom/div #js
                 {:className "col-md-6 btn-poz"}
             (dom/div #js
@@ -82,7 +81,11 @@
                 (dom/button #js
                     {:type "button"
                      :className "btn btn-default buttonColor"
-                     :onClick (fn [e] (displayShop state))} "Shop")))))))
+                     :onClick (fn [e] (displayShop state))} "Shop"))
+            (let [{menu :menu} state]
+                (if (= menu "true")
+                    (dom/div nil "merge")
+                    (dom/div nil "si asta merge"))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
