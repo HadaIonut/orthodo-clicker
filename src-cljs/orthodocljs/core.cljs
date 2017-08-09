@@ -20,8 +20,8 @@
   (.log js/console (str "something bad happened: " status " " status-text)))
 
 (defn add [state]
-    (let [{coins :coins} state]
-        (+ 1 coins)))
+    (let [{coins :coins coinMod :coinMod} state]
+        (+ coinMod coins)))
 
 (defn stateMenu [state]
     (let [{menu :menu} state]
@@ -31,11 +31,19 @@
     (let [{menu :menu} state]
         (string/replace menu #"true" "false")))
 
+(defn clickerInc [state]
+    (let [{coinMod :coinMod coins :coins} state]
+        (om/update! state :coinMod (+ 1 coinMod))
+        (om/update! state :coins (- coins (+ 100 (* coinMod 50))))))
+
+(defn clickUPG [state]
+    (let [{coinMod :coinMod coins :coins} state]
+        (if (> coins (+ 100 (* coinMod 50))) (clickerInc state))))
+
 (defonce app-state
     (atom {:coins 0
-           :modifiers
-           [{:coinMod 1}
-            {:clickers 0}]
+           :coinMod 1
+           :clickers 0
            :menu "true"}))
 
 (defn manualGen [state]
@@ -84,7 +92,11 @@
                      :onClick (fn [e] (displayShop state))} "Shop"))
             (let [{menu :menu} state]
                 (if (= menu "true")
-                    (dom/div nil "merge")
+                    (dom/div nil
+                        (dom/button #js
+                            {:onClick (fn [e] (clickUPG state))} "Click Modifier")
+                        (let [{coinMod :coinMod} state]
+                            (+ 100 (* coinMod 50))))
                     (dom/div nil "si asta merge"))))))))
 
   (om/root root-comp app-state
