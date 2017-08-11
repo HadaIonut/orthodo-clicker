@@ -3,7 +3,7 @@
   (:require [ajax.core :refer [GET POST]]
             [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
-            [cljs.core.async :refer [put! chan <!]]
+            [cljs.core.async :refer [put! chan poll! <! >!]]
             [clojure.string :as string]))
 
 (enable-console-print!)
@@ -34,17 +34,24 @@
 (defn clickerInc [state]
     (let [{coinMod :coinMod coins :coins} state]
         (om/update! state :coinMod (+ 1 coinMod))
-        (om/update! state :coins (- coins (+ 100 (* coinMod 50))))))
+        (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))))
 
 (defn clickUPG [state]
     (let [{coinMod :coinMod coins :coins} state]
-        (if (> coins (+ 100 (* coinMod 50))) (clickerInc state))))
+        (if (> coins (+ 100 (* coinMod (* 50 coinMod)))) (clickerInc state))))
+
+(defn clicker [state])
+    ;(let [{}]))
 
 (defonce app-state
     (atom {:coins 0
            :coinMod 1
            :clickers 0
            :menu "true"}))
+
+(defn change [coins owner]
+    (let [Mod (om/get-state owner :coinMod)]
+        (+ coins Mod)))
 
 (defn manualGen [state]
     (om/update! state :coins (add state)))
@@ -59,10 +66,9 @@
     (reify
         om/IWillMount
         (will-mount [this]
-            (dom/div #js
-                {:id "btn1"
-                 :className "tab-pane fade in active"}
-                 (dom/p "hello")))
+            (js/setInterval #(om/transact! state :coins
+                (fn [coins]
+                    (+ coins 1))) 1000))
         om/IRender
         (render [this]
         (dom/div #js
@@ -89,15 +95,26 @@
                 (dom/button #js
                     {:type "button"
                      :className "btn btn-default buttonColor"
-                     :onClick (fn [e] (displayShop state))} "Shop"))
+                     :onClick (fn [e] (displayShop state))}
+                            "Shop"))
             (let [{menu :menu} state]
                 (if (= menu "true")
                     (dom/div nil
-                        (dom/button #js
-                            {:onClick (fn [e] (clickUPG state))} "Click Modifier")
-                        (let [{coinMod :coinMod} state]
-                            (+ 100 (* coinMod 50))))
-                    (dom/div nil "si asta merge"))))))))
+                        (dom/div nil "menu"))
+
+                    (dom/div nil
+                        (dom/div nil
+                            (dom/div nil
+                                (dom/button #js
+                                    {:onClick (fn [e] (clickUPG state))}
+                                            "Click Modifier")
+                                (let [{coinMod :coinMod} state]
+                                    (+ 100 (* coinMod (* 50 coinMod)))))
+                            (dom/div nil
+                                (dom/button #js
+                                    {:onClick (fn [e] (clicker state))}
+                                            "Clicker")
+                            ))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
