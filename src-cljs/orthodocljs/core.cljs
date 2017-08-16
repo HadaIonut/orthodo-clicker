@@ -13,6 +13,10 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
+(defn updateState [state owner]
+    (let [{coinMod :coinMod clickers :clickers} state]
+    (om/set-state! owner :LocState {:coinMod (+ coinMod 1) :clickers clickers})))
+
 (defn handler [response]
   (.log js/console (str response)))
 
@@ -31,20 +35,27 @@
     (let [{menu :menu} state]
         (string/replace menu #"true" "false")))
 
-(defn clickerInc [state]
-    (let [{coinMod :coinMod coins :coins} state]
+(defn coinModInc [state owner]
+    (let [{coinMod :coinMod coins :coins clickers :clickers} state]
         (om/update! state :coinMod (+ 1 coinMod))
-        (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))))
+        (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod))))
+        (updateState state owner))))
 
-(defn clickUPG [state]
+(defn clickUPG [state owner]
     (let [{coinMod :coinMod coins :coins} state]
-        (if (> coins (+ 100 (* coinMod (* 50 coinMod)))) (clickerInc state))))
+        (if (> coins (+ 100 (* coinMod (* 50 coinMod))))
+            (coinModInc state owner))))
 
-(defn clicker [state])
-    ;(let [{}]))
+(defn clickerInc [state owner]
+    (let [{clickers :clickers coins :coins coinMod :coinMod} state]
+        (if (> coins 150)
+            ((om/update! state :clickers (+ 1 clickers))
+            (om/update! state :coins (- coins 150))
+            (om/set-state! owner :LocState
+                                {:coinMod coinMod :clickers (+ clickers 1)})))))
 
 (defonce app-state
-    (atom {:coins 0
+    (atom {:coins 150
            :coinMod 1
            :clickers 0
            :menu "true"}))
@@ -64,11 +75,15 @@
 
 (defn root-comp [state owner]
     (reify
+        om/IInitState
+        (init-state [_]
+            {:LocState state})
         om/IWillMount
         (will-mount [this]
             (js/setInterval #(om/transact! state :coins
                 (fn [coins]
-                    (+ coins 1))) 1000))
+                    (let [ver ((om/get-state owner) :LocState)]
+                    (+ coins (* (ver :coinMod) (ver :clickers)))))) 1000))
         om/IRender
         (render [this]
         (dom/div #js
@@ -97,6 +112,7 @@
                      :className "btn btn-default buttonColor"
                      :onClick (fn [e] (displayShop state))}
                             "Shop"))
+
             (let [{menu :menu} state]
                 (if (= menu "true")
                     (dom/div nil
@@ -106,15 +122,16 @@
                         (dom/div nil
                             (dom/div nil
                                 (dom/button #js
-                                    {:onClick (fn [e] (clickUPG state))}
+                                    {:onClick (fn [e] (clickUPG state owner))}
                                             "Click Modifier")
                                 (let [{coinMod :coinMod} state]
-                                    (+ 100 (* coinMod (* 50 coinMod)))))
+                                    (+ 100 (* coinMod (* 50 coinMod))))
+                                    " X " (state :coinMod))
                             (dom/div nil
                                 (dom/button #js
-                                    {:onClick (fn [e] (clicker state))}
+                                    {:onClick (fn [e] (clickerInc state owner))}
                                             "Clicker")
-                            ))))))))))
+                                 "150 X " (state :clickers)))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})

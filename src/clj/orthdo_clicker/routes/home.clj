@@ -8,19 +8,6 @@
             [clojure.java.io :as io]
             [environ.core :refer [env]]))
 
-(def debe
-  (db/create-db
-    (db/mysql {:db "ionut"
-               :user "root"
-               :password (env :db-pass)
-               :host "172.17.0.2"
-               :port "3306"})))
-
-(db/default-connection debe)
-
-(defentity BIGBOI)
-(select BIGBOI)
-
 (defn home-page []
   (selmer.parser/render-file "home.html" {:params "test"}))
 
