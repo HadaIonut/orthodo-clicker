@@ -43,12 +43,12 @@
 
 (defn clickUPG [state owner]
     (let [{coinMod :coinMod coins :coins} state]
-        (if (> coins (+ 100 (* coinMod (* 50 coinMod))))
+        (if (>= coins (+ 100 (* coinMod (* 50 coinMod))))
             (coinModInc state owner))))
 
 (defn clickerInc [state owner]
     (let [{clickers :clickers coins :coins coinMod :coinMod} state]
-        (if (> coins 150)
+        (if (>= coins 150)
             ((om/update! state :clickers (+ 1 clickers))
             (om/update! state :coins (- coins 150))
             (om/set-state! owner :LocState

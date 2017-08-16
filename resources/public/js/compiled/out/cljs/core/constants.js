@@ -108,6 +108,7 @@ cljs.core.cst$kw$clickers = new cljs.core.Keyword(null,"clickers","clickers",-78
 cljs.core.cst$sym$bitmap = new cljs.core.Symbol(null,"bitmap","bitmap",501334601,null);
 cljs.core.cst$sym$_seq = new cljs.core.Symbol(null,"_seq","_seq",-449557847,null);
 cljs.core.cst$sym$nil_DASH_val = new cljs.core.Symbol(null,"nil-val","nil-val",-513933559,null);
+cljs.core.cst$sym$meta34252 = new cljs.core.Symbol(null,"meta34252","meta34252",334368649,null);
 cljs.core.cst$sym$solo_DASH_mode = new cljs.core.Symbol(null,"solo-mode","solo-mode",2031788074,null);
 cljs.core.cst$kw$response_DASH_format = new cljs.core.Keyword(null,"response-format","response-format",1664465322);
 cljs.core.cst$kw$status_DASH_text = new cljs.core.Keyword(null,"status-text","status-text",-1834235478);
