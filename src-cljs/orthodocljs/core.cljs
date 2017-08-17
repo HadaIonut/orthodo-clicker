@@ -92,9 +92,10 @@
                 {:className "col-md-4"}
                 (dom/p #js
                     {:className "coinsGenerated"} (:coins state))
-                (dom/button #js
+                (dom/img #js
                     {:onClick (fn [e] (manualGen state))
-                     :className "Generator"} "Say hi"))
+                     :className "Generator"
+                     :src "/img/OrthodoCoin.png"}))
 
             (dom/div #js
                 {:className "col-md-2"})
@@ -116,21 +117,38 @@
             (let [{menu :menu} state]
                 (if (= menu "true")
                     (dom/div nil
-                        (dom/div nil "menu"))
+                        (dom/div #js
+                                 {:className "MenuText"}
+                            "Increase people's belief power
+                             to get more money!")
+                        (dom/div #js
+                                 {:className "MenuText"}
+                            "This is their belief power now: "
+                            (state :coinMod))
+                        (dom/div #js
+                                 {:className "MenuText"}
+                            "Here you have your army:")
+                        (dom/div #js
+                                 {:className "MenuText"}
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Prist.png"
+                                          :className "img"})
+                                "Prists " (state :clickers))))
 
                     (dom/div nil
                         (dom/div nil
                             (dom/div nil
                                 (dom/button #js
                                     {:onClick (fn [e] (clickUPG state owner))}
-                                            "Click Modifier")
+                                            "Belief Power")
                                 (let [{coinMod :coinMod} state]
                                     (+ 100 (* coinMod (* 50 coinMod))))
                                     " X " (state :coinMod))
                             (dom/div nil
                                 (dom/button #js
                                     {:onClick (fn [e] (clickerInc state owner))}
-                                            "Clicker")
+                                            "Prists")
                                  "150 X " (state :clickers)))))))))))
 
   (om/root root-comp app-state

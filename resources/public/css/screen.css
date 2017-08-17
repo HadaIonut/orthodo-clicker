@@ -32,13 +32,14 @@ body {
   }
   .Generator{
 	  position: relative;
-	  left: 105px;
-	  top: 225px;
+	  top: 175px;
+	  width: 300px;
+	  height: 220px;
   }
   .coinsGenerated{
 	  font-size: 200%;
-	  text-indent: 50px;
-	  color: #BDC194;
+	  text-indent: 115px;
+	  color: #e2e2e2;
 	  text-shadow: -3px 2px #383838;
 	  font: Arial;
   }
@@ -57,5 +58,24 @@ body {
   }
   .btn-poz{
 	  padding-top: 30px
+  }
+  .img{
+	  width: 65px;
+	  height: 65px;
+	  position: relative;
+	  top: 1px;
+	  left: 5px;
+  }
+  .MenuText{
+	font-weight: bold;
+	font-size: 130%;
+	color: #e2e2e2;
+	text-shadow: 0.5px 2px #383838;
+	font: Arial;
+  }
+  .construction{
+	  width: 400px;
+	  height: 66px;
+	  background-color: #383838;
   }
 }
