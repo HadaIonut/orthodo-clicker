@@ -14,8 +14,17 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defn updateState [state owner]
-    (let [{coinMod :coinMod clickers :clickers} state]
-    (om/set-state! owner :LocState {:coinMod (+ coinMod 1) :clickers clickers})))
+    (let [{coinMod :coinMod
+           clickers :clickers
+           churches :churches
+           genSec :genSec} state]
+    (om/update! state :genSec (+ genSec (* coinMod clickers)
+                                        (* coinMod churches)))
+    (om/set-state! owner :LocState {:coinMod (+ coinMod 1)
+                                    :clickers clickers
+                                    :churches churches
+                                    :genSec (+ genSec (* coinMod clickers)
+                                                      (* coinMod churches))})))
 
 (defn handler [response]
   (.log js/console (str response)))
@@ -36,7 +45,9 @@
         (string/replace menu #"true" "false")))
 
 (defn coinModInc [state owner]
-    (let [{coinMod :coinMod coins :coins clickers :clickers} state]
+    (let [{coinMod :coinMod
+           coins :coins
+           clickers :clickers} state]
         (om/update! state :coinMod (+ 1 coinMod))
         (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod))))
         (updateState state owner))))
@@ -47,18 +58,46 @@
             (coinModInc state owner))))
 
 (defn clickerInc [state owner]
-    (let [{clickers :clickers coins :coins coinMod :coinMod} state]
+    (let [{clickers :clickers
+           coins :coins
+           coinMod :coinMod
+           churches :churches
+           genSec :genSec} state]
         (if (>= coins 150)
             ((om/update! state :clickers (+ 1 clickers))
             (om/update! state :coins (- coins 150))
+            (om/update! state :genSec (+ genSec coinMod))
             (om/set-state! owner :LocState
-                                {:coinMod coinMod :clickers (+ clickers 1)})))))
+                                {:coinMod coinMod
+                                 :clickers (+ clickers 1)
+                                 :churches churches
+                                 :genSec (+ genSec coinMod)})))))
+    ;;Add any new item that you can buy here and at line 16,updateState fn
+    ;;ofc and below
+
+(defn churchesInc [state owner]
+    (let [{clickers :clickers
+           coins :coins
+           coinMod :coinMod
+           churches :churches
+           genSec :genSec} state]
+        (if (>= coins 3500)
+            ((om/update! state :churches (+ 1 churches))
+             (om/update! state :coins (- coins 3500))
+             (om/update! state :genSec (+ genSec (* coinMod 15)))
+             (om/set-state! owner :LocState
+                                 {:coinMod coinMod
+                                  :clickers clickers
+                                  :churches (+ churches 1)
+                                  :genSec (+ genSec (* coinMod 15))})))))
 
 (defonce app-state
     (atom {:coins 150
            :coinMod 1
            :clickers 0
-           :menu "true"}))
+           :churches 0
+           :menu "true"
+           :genSec 0}))
 
 (defn change [coins owner]
     (let [Mod (om/get-state owner :coinMod)]
@@ -83,7 +122,7 @@
             (js/setInterval #(om/transact! state :coins
                 (fn [coins]
                     (let [ver ((om/get-state owner) :LocState)]
-                    (+ coins (* (ver :coinMod) (ver :clickers)))))) 1000))
+                    (+ coins (/ (ver :genSec) 2))))) 500))
         om/IRender
         (render [this]
         (dom/div #js
@@ -92,6 +131,7 @@
                 {:className "col-md-4"}
                 (dom/p #js
                     {:className "coinsGenerated"} (:coins state))
+                (dom/div nil (:genSec state))
                 (dom/img #js
                     {:onClick (fn [e] (manualGen state))
                      :className "Generator"
@@ -103,7 +143,7 @@
             (dom/div #js
                 {:className "col-md-6 btn-poz"}
             (dom/div #js
-                {:className "btn-group"}
+                {:className "btn-group btn-extras"}
                 (dom/button #js
                     {:type "button"
                      :className "btn btn-default buttonColor"
@@ -137,19 +177,28 @@
                                 "Prists " (state :clickers))))
 
                     (dom/div nil
+                        (dom/div #js
+                                 {:className "ShopText"}
+                            (dom/button #js
+                                {:onClick (fn [e] (clickUPG state owner))
+                                 :className "construction ShopText"}
+                                        "Upgrade Belief Power: "
+                            (let [{coinMod :coinMod} state]
+                                (+ 100 (* coinMod (* 50 coinMod))))))
                         (dom/div nil
-                            (dom/div nil
-                                (dom/button #js
-                                    {:onClick (fn [e] (clickUPG state owner))}
-                                            "Belief Power")
-                                (let [{coinMod :coinMod} state]
-                                    (+ 100 (* coinMod (* 50 coinMod))))
-                                    " X " (state :coinMod))
-                            (dom/div nil
-                                (dom/button #js
-                                    {:onClick (fn [e] (clickerInc state owner))}
-                                            "Prists")
-                                 "150 X " (state :clickers)))))))))))
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                            (clickerInc state owner))
+                                         :className "construction ShopText"}
+                                (dom/img #js {:src "/img/Prist.png"
+                                              :className "imgShop"})
+                                "Buy Prists: 150" ))
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                            (churchesInc state owner))
+                                         :className "construction ShopText"}
+                                "Buy Churches: 3500"))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
