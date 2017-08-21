@@ -43,6 +43,13 @@ body {
 	  text-shadow: -3px 2px #383838;
 	  font: Arial;
   }
+  .coinsSec{
+	font-size: 130%;
+	text-indent: 75px;
+	color: #e2e2e2;
+	text-shadow: -3px 2px #383838;
+	font: Arial;
+  }
   .container1{
 	  padding-top: 10px;
 	  padding-left: 20px;
@@ -52,7 +59,6 @@ body {
 	  background-color:#939393;
 	  border-style: solid;
 	  border-color: black;
-	  font-size: 150%;
 	  padding-left: 75px;
 	  padding-right: 75px;
   }
@@ -96,4 +102,28 @@ body {
 	top: 1px;
 	left: 5px;
   }
+  .imgShop2{
+  	width: 63px;
+  	height: 63px;
+  	position: relative;
+  	top: 1px;
+  }
+  .buy{
+	width: 300px;
+ 	height: 68px;
+  	background-color: #383838;
+  }
+  .btnColor{
+	background-color:#939393;
+	border-style: solid;
+	border-color: black;
+	width: 150px;
+ 	height: 40px;
+  }
+  .ShopText2{
+	font-size: 110%;
+	font: Arial;
+  	text-align: left;
+  }
+
 }

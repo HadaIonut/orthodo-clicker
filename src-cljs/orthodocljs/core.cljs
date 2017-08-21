@@ -97,6 +97,7 @@
            :clickers 0
            :churches 0
            :menu "true"
+           :shop "Prists"
            :genSec 0}))
 
 (defn change [coins owner]
@@ -108,6 +109,12 @@
 
 (defn displayManu [state]
     (om/update! state :menu (stateMenu state)))
+
+(defn displayPrists [state]
+    (om/update! state :shop "Prists"))
+
+(defn displayBuild [state]
+    (om/update! state :shop "Buildings"))
 
 (defn displayShop [state]
     (om/update! state :menu (stateShop state)))
@@ -122,7 +129,7 @@
             (js/setInterval #(om/transact! state :coins
                 (fn [coins]
                     (let [ver ((om/get-state owner) :LocState)]
-                    (+ coins (/ (ver :genSec) 2))))) 500))
+                    (+ coins (/ (ver :genSec) 1))))) 1000))
         om/IRender
         (render [this]
         (dom/div #js
@@ -131,7 +138,8 @@
                 {:className "col-md-4"}
                 (dom/p #js
                     {:className "coinsGenerated"} (:coins state))
-                (dom/div nil (:genSec state))
+                (dom/div #js
+                    {:className "coinsSec"} "Coins/Sec: "(:genSec state))
                 (dom/img #js
                     {:onClick (fn [e] (manualGen state))
                      :className "Generator"
@@ -174,14 +182,43 @@
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Prist.png"
                                           :className "img"})
-                                "Prists " (state :clickers))))
+                                "Prists " (state :clickers))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Church.png"
+                                          :className "img"})
+                                "Churches " (state :churches))))
 
                     (dom/div nil
                         (dom/div #js
-                                 {:className "ShopText"}
+                            {:className "col-md-2"}
+                        (dom/div nil
+                            (dom/button #js
+                                {:type "button"
+                                 :className "btn btn-default
+                                             btnColor ShopText2"
+                                 :onClick (fn [e]
+                                          (displayPrists state))} "Prists"))
+                        (dom/div nil
+                            (dom/button #js
+                                {:type "button"
+                                 :className "btn btn-default
+                                             btnColor ShopText2"
+                                 :onClick (fn [e]
+                                          (displayBuild state))} "Buildings")))
+
+                        (dom/div #js
+                            {:className "col-md-2"})
+
+                        (dom/div #js
+                            {:className "col-md-4"}
+                        (if (= (state :shop) "Prists")
+
+                        (dom/div nil
+                        (dom/div nil
                             (dom/button #js
                                 {:onClick (fn [e] (clickUPG state owner))
-                                 :className "construction ShopText"}
+                                 :className "buy ShopText"}
                                         "Upgrade Belief Power: "
                             (let [{coinMod :coinMod} state]
                                 (+ 100 (* coinMod (* 50 coinMod))))))
@@ -189,16 +226,20 @@
                             (dom/button #js
                                         {:onClick (fn [e]
                                             (clickerInc state owner))
-                                         :className "construction ShopText"}
+                                         :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Prist.png"
                                               :className "imgShop"})
-                                "Buy Prists: 150" ))
+                                "Buy Prists: 150" )))
+
+                        (dom/div nil
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
                                             (churchesInc state owner))
-                                         :className "construction ShopText"}
-                                "Buy Churches: 3500"))))))))))
+                                         :className "buy ShopText"}
+                                (dom/img #js {:src "/img/Church.png"
+                                              :className "imgShop2"})
+                                "Buy Churches: 3500")))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
