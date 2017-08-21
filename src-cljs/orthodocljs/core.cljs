@@ -13,18 +13,8 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defn updateState [state owner]
-    (let [{coinMod :coinMod
-           clickers :clickers
-           churches :churches
-           genSec :genSec} state]
-    (om/update! state :genSec (+ genSec (* coinMod clickers)
-                                        (* coinMod churches)))
-    (om/set-state! owner :LocState {:coinMod (+ coinMod 1)
-                                    :clickers clickers
-                                    :churches churches
-                                    :genSec (+ genSec (* coinMod clickers)
-                                                      (* coinMod churches))})))
+(defn changeState [in owner]
+    (om/set-state! owner :LocState {:genSec in}))
 
 (defn handler [response]
   (.log js/console (str response)))
@@ -47,10 +37,15 @@
 (defn coinModInc [state owner]
     (let [{coinMod :coinMod
            coins :coins
-           clickers :clickers} state]
+           clickers :clickers
+           churches :churches
+           genSec :genSec} state]
         (om/update! state :coinMod (+ 1 coinMod))
-        (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod))))
-        (updateState state owner))))
+        (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))
+        (om/update! state :genSec (+ (* (+ coinMod 1) clickers)
+                                     (* (+ coinMod 1) (* churches 15))))
+        (changeState (+ (* (+ coinMod 1) clickers)
+                        (* (+ coinMod 1) churches)) owner)))
 
 (defn clickUPG [state owner]
     (let [{coinMod :coinMod coins :coins} state]
@@ -67,13 +62,7 @@
             ((om/update! state :clickers (+ 1 clickers))
             (om/update! state :coins (- coins 150))
             (om/update! state :genSec (+ genSec coinMod))
-            (om/set-state! owner :LocState
-                                {:coinMod coinMod
-                                 :clickers (+ clickers 1)
-                                 :churches churches
-                                 :genSec (+ genSec coinMod)})))))
-    ;;Add any new item that you can buy here and at line 16,updateState fn
-    ;;ofc and below
+            (changeState (+ genSec coinMod) owner)))))
 
 (defn churchesInc [state owner]
     (let [{clickers :clickers
@@ -85,14 +74,10 @@
             ((om/update! state :churches (+ 1 churches))
              (om/update! state :coins (- coins 3500))
              (om/update! state :genSec (+ genSec (* coinMod 15)))
-             (om/set-state! owner :LocState
-                                 {:coinMod coinMod
-                                  :clickers clickers
-                                  :churches (+ churches 1)
-                                  :genSec (+ genSec (* coinMod 15))})))))
+             (changeState (+ genSec (* coinMod 15)) owner)))))
 
 (defonce app-state
-    (atom {:coins 150
+    (atom {:coins 15000
            :coinMod 1
            :clickers 0
            :churches 0
@@ -182,7 +167,7 @@
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Prist.png"
                                           :className "img"})
-                                "Prists " (state :clickers))
+                                "Priests " (state :clickers))
                         (dom/div #js
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Church.png"
@@ -198,7 +183,7 @@
                                  :className "btn btn-default
                                              btnColor ShopText2"
                                  :onClick (fn [e]
-                                          (displayPrists state))} "Prists"))
+                                          (displayPrists state))} "Priests"))
                         (dom/div nil
                             (dom/button #js
                                 {:type "button"
@@ -229,7 +214,7 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Prist.png"
                                               :className "imgShop"})
-                                "Buy Prists: 150" )))
+                                "Buy Priests: 150" )))
 
                         (dom/div nil
                         (dom/div nil
