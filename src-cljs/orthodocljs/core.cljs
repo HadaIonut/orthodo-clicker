@@ -39,12 +39,15 @@
            coins :coins
            clickers :clickers
            churches :churches
+           shrines :shrines
            genSec :genSec} state]
         (om/update! state :coinMod (+ 1 coinMod))
         (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))
         (om/update! state :genSec (+ (* (+ coinMod 1) clickers)
-                                     (* (+ coinMod 1) (* churches 15))))
+                                     (* (+ coinMod 1) (* churches 15))
+                                     (* (+ coinMod 1) (* shrines 10))))
         (changeState (+ (* (+ coinMod 1) clickers)
+                        (* (+ coinMod 1) (* shrines 10))
                         (* (+ coinMod 1) churches)) owner)))
 
 (defn clickUPG [state owner]
@@ -76,11 +79,23 @@
              (om/update! state :genSec (+ genSec (* coinMod 15)))
              (changeState (+ genSec (* coinMod 15)) owner)))))
 
+(defn shrineInc [state owner]
+    (let [{shrines :shrines
+           coins :coins
+           genSec :genSec
+           coinMod :coinMod} state]
+        (if (>= coins 3500)
+            ((om/update! state :shrines (+ 1 shrines))
+             (om/update! state :coins (- coins 3500))
+             (om/update! state :genSec (+ genSec (* coinMod 10)))
+             (changeState (+ genSec (* coinMod 10)) owner)))))
+
 (defonce app-state
     (atom {:coins 15000
            :coinMod 1
            :clickers 0
            :churches 0
+           :shrines 0
            :menu "true"
            :shop "Prists"
            :genSec 0}))
@@ -172,7 +187,12 @@
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Church.png"
                                           :className "img"})
-                                "Churches " (state :churches))))
+                                "Churches " (state :churches))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Shrine.png"
+                                          :className "img"})
+                                "Shrines " (state :shrines))))
 
                     (dom/div nil
                         (dom/div #js
@@ -224,7 +244,16 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Church.png"
                                               :className "imgShop2"})
-                                "Buy Churches: 3500")))))))))))))
+                                "Buy Churches: 3500"))
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                            (shrineInc state owner))
+                                         :className "buy ShopText"}
+                                (dom/img #js
+                                         {:src "/img/Shrine.png"
+                                          :className "imgShop2"})
+                                    "Buy Shrines: 3500")))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
