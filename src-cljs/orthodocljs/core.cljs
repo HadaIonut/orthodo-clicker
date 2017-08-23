@@ -1,4 +1,4 @@
-(ns orthodocljs.core
+    (ns orthodocljs.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [ajax.core :refer [GET POST]]
             [om.core :as om :include-macros true]
@@ -40,14 +40,20 @@
            clickers :clickers
            churches :churches
            shrines :shrines
+           cathedrals :cathedrals
+           patriarchates :patriarchates
            genSec :genSec} state]
         (om/update! state :coinMod (+ 1 coinMod))
         (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))
         (om/update! state :genSec (+ (* (+ coinMod 1) clickers)
                                      (* (+ coinMod 1) (* churches 15))
-                                     (* (+ coinMod 1) (* shrines 10))))
+                                     (* (+ coinMod 1) (* shrines 10))
+                                     (* (+ coinMod 1) (* cathedrals 20))
+                                     (* (+ coinMod 1) (* patriarchates 30))))
         (changeState (+ (* (+ coinMod 1) clickers)
                         (* (+ coinMod 1) (* shrines 10))
+                        (* (+ coinMod 1) (* cathedrals 20))
+                        (* (+ coinMod 1) (* patriarchates 30))
                         (* (+ coinMod 1) churches)) owner)))
 
 (defn clickUPG [state owner]
@@ -90,12 +96,36 @@
              (om/update! state :genSec (+ genSec (* coinMod 10)))
              (changeState (+ genSec (* coinMod 10)) owner)))))
 
+(defn cathedralInc [state owner]
+    (let [{cathedrals :cathedrals
+           coins :coins
+           genSec :genSec
+           coinMod :coinMod} state]
+        (if (>= coins 3500)
+            ((om/update! state :cathedrals (+ 1 cathedrals))
+             (om/update! state :coins (- coins 3500))
+             (om/update! state :genSec (+ genSec (* coinMod 20)))
+             (changeState (+ genSec (* coinMod 20)) owner)))))
+
+(defn patriarchateInc [state owner]
+    (let [{patriarchates :patriarchates
+                coins :coins
+               genSec :genSec
+              coinMod :coinMod} state]
+        (if (>= coins 3500)
+            ((om/update! state :patriarchates (+ 1 patriarchates))
+             (om/update! state :coins (- coins 3500))
+             (om/update! state :genSec (+ genSec (* coinMod 30)))
+             (changeState (+ genSec (* coinMod 30)) owner)))))
+
 (defonce app-state
     (atom {:coins 15000
            :coinMod 1
            :clickers 0
            :churches 0
            :shrines 0
+           :cathedrals 0
+           :patriarchates 0
            :menu "true"
            :shop "Prists"
            :genSec 0}))
@@ -118,6 +148,9 @@
 
 (defn displayShop [state]
     (om/update! state :menu (stateShop state)))
+
+(defn displayExtras [state]
+    (om/update! state :shop "Extras"))
 
 (defn root-comp [state owner]
     (reify
@@ -192,7 +225,17 @@
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Shrine.png"
                                           :className "img"})
-                                "Shrines " (state :shrines))))
+                                "Shrines " (state :shrines))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Cathedral.png"
+                                          :className "img"})
+                                "Cathedrals " (state :cathedrals))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Patriarchate.png"
+                                          :className "img"})
+                                "Patriarchates " (state :patriarchates))))
 
                     (dom/div nil
                         (dom/div #js
@@ -210,7 +253,15 @@
                                  :className "btn btn-default
                                              btnColor ShopText2"
                                  :onClick (fn [e]
-                                          (displayBuild state))} "Buildings")))
+                                          (displayBuild state))} "Buildings"))
+
+                        (dom/div nil
+                            (dom/button #js
+                                {:type "button"
+                                 :className "btn btn-default
+                                             btnColor ShopText2"
+                                 :onClick (fn [e]
+                                          (displayExtras state))} "Extras")))
 
                         (dom/div #js
                             {:className "col-md-2"})
@@ -234,7 +285,9 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Prist.png"
                                               :className "imgShop"})
-                                "Buy Priests: 150" )))
+                                "Buy Priests: 150" ))))
+
+                        (if (= (state :shop) "Buildings")
 
                         (dom/div nil
                         (dom/div nil
@@ -253,7 +306,30 @@
                                 (dom/img #js
                                          {:src "/img/Shrine.png"
                                           :className "imgShop2"})
-                                    "Buy Shrines: 3500")))))))))))))
+                                    "Buy Shrines: 3500"))
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                            (cathedralInc state owner))
+                                         :className "buy ShopText"}
+                                (dom/img #js
+                                         {:src "/img/Cathedral.png"
+                                          :className "imgShop2"})
+                                    "Buy Cathedrals: 3500"))
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                            (patriarchateInc state owner))
+                                         :className "buy ShopText"}
+                                (dom/img #js
+                                         {:src "/img/Patriarchate.png"
+                                          :className "imgShop2"})
+                                    "Buy Patriarchate: 3500"))))
+
+                        (if (= (state :shop) "Extras")
+
+                        (dom/div nil
+                        (dom/div nil))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
