@@ -13,8 +13,17 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defn changeState [in owner]
-    (om/set-state! owner :LocState {:genSec in}))
+(defn changeState [in owner live]
+    (if (= live 0)
+    (om/set-state! owner :LocState {:genSec in
+                                    :live (((om/get-state owner) :LocState)
+                                                                 :live)
+                                    :trigger (((om/get-state owner) :LocState)
+                                                                    :trigger)})
+    (om/set-state! owner :LocState {:genSec in
+                                    :live live
+                                    :trigger (((om/get-state owner) :LocState)
+                                                                    :trigger)})))
 
 (defn handler [response]
   (.log js/console (str response)))
@@ -40,21 +49,23 @@
            clickers :clickers
            churches :churches
            shrines :shrines
+           event :religiousEvents
            cathedrals :cathedrals
            patriarchates :patriarchates
            genSec :genSec} state]
         (om/update! state :coinMod (+ 1 coinMod))
         (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))
-        (om/update! state :genSec (+ (* (+ coinMod 1) clickers)
-                                     (* (+ coinMod 1) (* churches 15))
-                                     (* (+ coinMod 1) (* shrines 10))
-                                     (* (+ coinMod 1) (* cathedrals 20))
-                                     (* (+ coinMod 1) (* patriarchates 30))))
-        (changeState (+ (* (+ coinMod 1) clickers)
-                        (* (+ coinMod 1) (* shrines 10))
-                        (* (+ coinMod 1) (* cathedrals 20))
-                        (* (+ coinMod 1) (* patriarchates 30))
-                        (* (+ coinMod 1) churches)) owner)))
+        (om/update! state :genSec (* (+ (* (+ coinMod 1) clickers)
+                                        (* (+ coinMod 1) (* churches 15))
+                                        (* (+ coinMod 1) (* shrines 10))
+                                        (* (+ coinMod 1) (* cathedrals 20))
+                                        (* (+ coinMod 1) (* patriarchates 30)))
+                                    event))
+        (changeState (* (+ (* (+ coinMod 1) clickers)
+                           (* (+ coinMod 1) (* shrines 10))
+                           (* (+ coinMod 1) (* cathedrals 20))
+                           (* (+ coinMod 1) (* patriarchates 30))
+                           (* (+ coinMod 1) churches)) event) owner 0)))
 
 (defn clickUPG [state owner]
     (let [{coinMod :coinMod coins :coins} state]
@@ -66,57 +77,68 @@
            coins :coins
            coinMod :coinMod
            churches :churches
+           event :religiousEvents
            genSec :genSec} state]
         (if (>= coins 150)
             ((om/update! state :clickers (+ 1 clickers))
             (om/update! state :coins (- coins 150))
-            (om/update! state :genSec (+ genSec coinMod))
-            (changeState (+ genSec coinMod) owner)))))
+            (om/update! state :genSec (+ genSec (* coinMod event)))
+            (changeState (+ genSec (* coinMod event)) owner 0)))))
 
 (defn churchesInc [state owner]
     (let [{clickers :clickers
            coins :coins
            coinMod :coinMod
            churches :churches
+           event :religiousEvents
            genSec :genSec} state]
         (if (>= coins 3500)
             ((om/update! state :churches (+ 1 churches))
              (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 15)))
-             (changeState (+ genSec (* coinMod 15)) owner)))))
+             (om/update! state :genSec (+ genSec (* coinMod 15 event)))
+             (changeState (+ genSec (* coinMod 15 event)) owner 0)))))
 
 (defn shrineInc [state owner]
     (let [{shrines :shrines
            coins :coins
+           event :religiousEvents
            genSec :genSec
            coinMod :coinMod} state]
         (if (>= coins 3500)
             ((om/update! state :shrines (+ 1 shrines))
              (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 10)))
-             (changeState (+ genSec (* coinMod 10)) owner)))))
+             (om/update! state :genSec (+ genSec (* coinMod 10 event)))
+             (changeState (+ genSec (* coinMod 10 event)) owner 0)))))
 
 (defn cathedralInc [state owner]
     (let [{cathedrals :cathedrals
            coins :coins
            genSec :genSec
+           event :religiousEvents
            coinMod :coinMod} state]
         (if (>= coins 3500)
             ((om/update! state :cathedrals (+ 1 cathedrals))
              (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 20)))
-             (changeState (+ genSec (* coinMod 20)) owner)))))
+             (om/update! state :genSec (+ genSec (* coinMod 20 event)))
+             (changeState (+ genSec (* coinMod 20 event)) owner 0)))))
 
 (defn patriarchateInc [state owner]
     (let [{patriarchates :patriarchates
                 coins :coins
                genSec :genSec
+               event :religiousEvents
               coinMod :coinMod} state]
         (if (>= coins 3500)
             ((om/update! state :patriarchates (+ 1 patriarchates))
              (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 30)))
-             (changeState (+ genSec (* coinMod 30)) owner)))))
+             (om/update! state :genSec (+ genSec (* coinMod 30 event)))
+             (changeState (+ genSec (* coinMod 30 event)) owner 0)))))
+
+(defn ReligiousEventsInc [state owner]
+    (if (>= (state :coins) 1750)
+        ((om/update! state :reLock 0)
+         (om/update! state :coins (- (state :coins) 1750))
+         (changeState (state :genSec) owner 100))))
 
 (defonce app-state
     (atom {:coins 15000
@@ -126,6 +148,8 @@
            :shrines 0
            :cathedrals 0
            :patriarchates 0
+           :religiousEvents 1
+           :reLock 10
            :menu "true"
            :shop "Prists"
            :genSec 0}))
@@ -152,17 +176,45 @@
 (defn displayExtras [state]
     (om/update! state :shop "Extras"))
 
+(defn periodicly [state owner]
+    (let [pula (rand-int 300)]
+    (om/transact! state :coins
+    (fn [coins]
+        (let [ver ((om/get-state owner) :LocState)]
+        (+ coins (/ (ver :genSec) 1)))))
+    (let [ver ((om/get-state owner) :LocState)]
+        (if-not (= (ver :live) 0)
+            ((println pula)
+             (println (ver :trigger))
+             (println (ver :live))
+            (if (and (= pula 5) (= (ver :trigger) 0))
+             ((om/set-state! owner :LocState {:genSec (* (ver :genSec) 2)
+                                             :live (ver :live)
+                                             :trigger 1})
+              (om/update! state :genSec (* (ver :genSec) 2))
+              (om/update! state :religiousEvents 2)))
+             (if (= (ver :trigger) 1)
+                 (om/set-state! owner :LocState {:genSec (ver :genSec)
+                                                 :live (- (ver :live ) 1)
+                                                 :trigger 1}))
+              (if (= (ver :live) 1)
+                  ((om/set-state! owner :LocState {:genSec (/ (ver :genSec) 2)
+                                                   :live 100
+                                                   :trigger 0})
+                   (om/update! state :genSec (/ (ver :genSec) 2))
+                   (om/update! state :religiousEvents 1))))))))
+
 (defn root-comp [state owner]
     (reify
         om/IInitState
         (init-state [_]
-            {:LocState state})
+            {:LocState {:genSec 0
+                        :live 0
+                        :trigger 0}})
         om/IWillMount
         (will-mount [this]
-            (js/setInterval #(om/transact! state :coins
-                (fn [coins]
-                    (let [ver ((om/get-state owner) :LocState)]
-                    (+ coins (/ (ver :genSec) 1))))) 1000))
+            (js/setInterval
+                #(periodicly state owner) 1000))
         om/IRender
         (render [this]
         (dom/div #js
@@ -329,7 +381,13 @@
                         (if (= (state :shop) "Extras")
 
                         (dom/div nil
-                        (dom/div nil))))))))))))
+                        (if (= (state :reLock) 10)
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                            (ReligiousEventsInc state owner))
+                                         :className "buy ShopText"}
+                                "Add Religious events: 1750"))))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
