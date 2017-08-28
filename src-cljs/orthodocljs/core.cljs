@@ -24,6 +24,8 @@
                                     :live live
                                     :trigger (((om/get-state owner) :LocState)
                                                                     :trigger)})))
+(defn atheistInc [state owner]
+    (om/update! state :atheists (inc (state :atheists))))
 
 (defn handler [response]
   (.log js/console (str response)))
@@ -43,7 +45,7 @@
     (let [{menu :menu} state]
         (string/replace menu #"true" "false")))
 
-(defn coinModInc [state owner]
+(defn coinModInc [state owner & [opt]]
     (let [{coinMod :coinMod
            coins :coins
            clickers :clickers
@@ -53,8 +55,15 @@
            cathedrals :cathedrals
            patriarchates :patriarchates
            genSec :genSec} state]
-        (om/update! state :coinMod (+ 1 coinMod))
-        (om/update! state :coins (- coins (+ 100 (* coinMod (* 50 coinMod)))))
+        (println (state :pamphlets))
+        (println (int (/ 7 (+ 1 (state :pamphlets)))))
+        (if (and opt (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
+            (om/update! state :coinMod
+                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))
+            (om/update! state :coinMod (+ 1 coinMod)))
+        (if-not opt
+            (om/update! state :coins
+                (- coins (+ 100 (* coinMod (* 50 coinMod))))))
         (om/update! state :genSec (* (+ (* (+ coinMod 1) clickers)
                                         (* (+ coinMod 1) (* churches 15))
                                         (* (+ coinMod 1) (* shrines 10))
@@ -140,8 +149,17 @@
          (om/update! state :coins (- (state :coins) 1750))
          (changeState (state :genSec) owner 100))))
 
+(defn pamphletsInc [state owner]
+    (if (>= (state :coins) 3500)
+        ((om/update! state :coins (- (state :coins) 3500))
+         (om/update! state :pamphlets (+ 1 (state :pamphlets)))
+         (let [chance (rand-int 100)]
+            (if (<= chance (int (/ 50 (/ (inc (state :pamphlets)) 2))))
+                (coinModInc state owner true)
+                (atheistInc state owner))))))
+
 (defonce app-state
-    (atom {:coins 15000
+    (atom {:coins 1500000
            :coinMod 1
            :clickers 0
            :churches 0
@@ -150,6 +168,8 @@
            :patriarchates 0
            :religiousEvents 1
            :reLock 10
+           :pamphlets 0
+           :atheists 0
            :menu "true"
            :shop "Prists"
            :genSec 0}))
@@ -188,21 +208,21 @@
              (println (ver :trigger))
              (println (ver :live))
             (if (and (= pula 5) (= (ver :trigger) 0))
-             ((om/set-state! owner :LocState {:genSec (* (ver :genSec) 2)
-                                             :live (ver :live)
-                                             :trigger 1})
-              (om/update! state :genSec (* (ver :genSec) 2))
-              (om/update! state :religiousEvents 2)))
-             (if (= (ver :trigger) 1)
-                 (om/set-state! owner :LocState {:genSec (ver :genSec)
-                                                 :live (- (ver :live ) 1)
-                                                 :trigger 1}))
-              (if (= (ver :live) 1)
-                  ((om/set-state! owner :LocState {:genSec (/ (ver :genSec) 2)
-                                                   :live 100
-                                                   :trigger 0})
-                   (om/update! state :genSec (/ (ver :genSec) 2))
-                   (om/update! state :religiousEvents 1))))))))
+                ((om/set-state! owner :LocState {:genSec (* (ver :genSec) 2)
+                                                 :live (ver :live)
+                                                 :trigger 1})
+                 (om/update! state :genSec (* (ver :genSec) 2))
+                 (om/update! state :religiousEvents 2)))
+            (if (= (ver :trigger) 1)
+                (om/set-state! owner :LocState {:genSec (ver :genSec)
+                                                :live (- (ver :live ) 1)
+                                                :trigger 1}))
+            (if (= (ver :live) 1)
+                ((om/set-state! owner :LocState {:genSec (/ (ver :genSec) 2)
+                                                 :live 100
+                                                 :trigger 0})
+                 (om/update! state :genSec (/ (ver :genSec) 2))
+                 (om/update! state :religiousEvents 1))))))))
 
 (defn root-comp [state owner]
     (reify
@@ -387,7 +407,13 @@
                                         {:onClick (fn [e]
                                             (ReligiousEventsInc state owner))
                                          :className "buy ShopText"}
-                                "Add Religious events: 1750"))))))))))))))
+                                "Add Religious events: 1750"))))
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                                  (pamphletsInc state owner))
+                                         :className "buy ShopText"}
+                                    "Send pamphlets: 3500"))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
