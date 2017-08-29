@@ -55,13 +55,13 @@
            cathedrals :cathedrals
            patriarchates :patriarchates
            genSec :genSec} state]
-        (println (state :pamphlets))
-        (println (int (/ 7 (+ 1 (state :pamphlets)))))
-        (if (and opt (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
+        (if (= opt "freeDays")
+            (om/update! state :coinMod (int (* coinMod 2))))
+        (if (and (= opt "pamphlets") (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
             (om/update! state :coinMod
-                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))
-            (om/update! state :coinMod (+ 1 coinMod)))
+                (int (* coinMod (/ 7 (+ 1 (state :pamphlets)))))))
         (if-not opt
+            (om/update! state :coinMod (+ 1 coinMod))
             (om/update! state :coins
                 (- coins (+ 100 (* coinMod (* 50 coinMod))))))
         (om/update! state :genSec (* (+ (* (+ coinMod 1) clickers)
@@ -155,8 +155,16 @@
          (om/update! state :pamphlets (+ 1 (state :pamphlets)))
          (let [chance (rand-int 100)]
             (if (<= chance (int (/ 50 (/ (inc (state :pamphlets)) 2))))
-                (coinModInc state owner true)
+                (coinModInc state owner "pamphlets")
                 (atheistInc state owner))))))
+
+(defn FreeDaysInc [state owner]
+    (if (>= (state :coins) 3500)
+        ((om/update! state :coins (- (state :coins) 3500))
+         (om/update! state :freeDays (+ 1 (state :freeDays)))
+         (let [chance (rand-int 100)]
+            (if (<= chance 50)
+                (coinModInc state owner "freeDays"))))))
 
 (defonce app-state
     (atom {:coins 1500000
@@ -170,6 +178,7 @@
            :reLock 10
            :pamphlets 0
            :atheists 0
+           :freeDays 0
            :menu "true"
            :shop "Prists"
            :genSec 0}))
@@ -400,20 +409,27 @@
 
                         (if (= (state :shop) "Extras")
 
+                    (dom/div nil
                         (dom/div nil
-                        (if (= (state :reLock) 10)
-                        (dom/div nil
-                            (dom/button #js
-                                        {:onClick (fn [e]
-                                            (ReligiousEventsInc state owner))
-                                         :className "buy ShopText"}
-                                "Add Religious events: 1750"))))
+                            (if (= (state :reLock) 10)
+                            (dom/div nil
+                                (dom/button #js
+                                            {:onClick (fn [e]
+                                                (ReligiousEventsInc state owner))
+                                             :className "buy ShopText"}
+                                    "Add Religious events: 1750"))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
                                                   (pamphletsInc state owner))
                                          :className "buy ShopText"}
-                                    "Send pamphlets: 3500"))))))))))))
+                                    "Send pamphlets: 3500"))
+                        (dom/div nil
+                            (dom/button #js
+                                        {:onClick (fn [e]
+                                                  (FreeDaysInc state owner))
+                                         :className "buy ShopText"}
+                                    "Get Free Days from work: 3500")))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
