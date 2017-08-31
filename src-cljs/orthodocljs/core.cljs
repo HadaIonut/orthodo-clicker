@@ -24,7 +24,7 @@
                                     :live live
                                     :trigger (((om/get-state owner) :LocState)
                                                                     :trigger)})))
-(defn coinModActualizer [state owner inc]
+(defn coinModActualizer [state owner inc ath]
     (println inc)
     (let [{coinMod :coinMod
            coins :coins
@@ -38,30 +38,28 @@
            event :religiousEvents
            cathedrals :cathedrals
            patriarchates :patriarchates
+           atheists :atheists
            genSec :genSec} state]
 
-    (om/update! state :genSec (* (+ (* inc clickers)
-                                    (* inc (* archpriest 5))
-                                    (* inc (* bishop 10))
-                                    (* inc (* archbishop 15))
-                                    (* inc (* patriarh 20))
-                                    (* inc (* churches 15))
-                                    (* inc (* shrines 10))
-                                    (* inc (* cathedrals 20))
-                                    (* inc (* patriarchates 30)))
+    (om/update! state :genSec (* (- (+ (* inc clickers)
+                                        (* inc (* archpriest 5))
+                                        (* inc (* bishop 10))
+                                        (* inc (* archbishop 15))
+                                        (* inc (* patriarh 20))
+                                        (* inc (* churches 15))
+                                        (* inc (* shrines 10))
+                                        (* inc (* cathedrals 20))
+                                        (* inc (* patriarchates 30))) ath)
                                 event))
-    (changeState (* (+ (* inc clickers)
-                       (* inc (* archpriest 5))
-                       (* inc (* bishop 10))
-                       (* inc (* archbishop 15))
-                       (* inc (* patriarh 20))
-                       (* inc (* shrines 10))
-                       (* inc (* cathedrals 20))
-                       (* inc (* patriarchates 30))
-                       (* inc churches)) event) owner 0)))
-
-(defn atheistInc [state owner]
-    (om/update! state :atheists (inc (state :atheists))))
+    (changeState (* (- (+ (* inc clickers)
+                        (* inc (* archpriest 5))
+                        (* inc (* bishop 10))
+                        (* inc (* archbishop 15))
+                        (* inc (* patriarh 20))
+                        (* inc (* shrines 10))
+                        (* inc (* cathedrals 20))
+                        (* inc (* patriarchates 30))
+                        (* inc churches)) ath) event) owner 0)))
 
 (defn handler [response]
   (.log js/console (str response)))
@@ -91,23 +89,32 @@
            patriarh :patriarh
            churches :churches
            shrines :shrines
+           atheists :atheists
            event :religiousEvents
            cathedrals :cathedrals
            patriarchates :patriarchates
            genSec :genSec} state]
+        (if (= opt "atheists")
+            ((om/update! state :coinMod (dec coinMod))
+            (om/update! state :atheists (inc (state :atheists)))
+            (coinModActualizer state owner coinMod 1)))
         (if (= opt "freeDays")
-            ((om/update! state :coinMod (int (* coinMod 2)))
-            (coinModActualizer state owner (* coinMod 2))))
+            ((om/update! state :coinMod (int (- (* coinMod 2) atheists)))
+            (coinModActualizer state owner (int (- (* coinMod 2) atheists)) 0)))
         (if (and (= opt "pamphlets") (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
             ((om/update! state :coinMod
-                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))
+                (int (- (* coinMod (/ 7 (+ 1 (state :pamphlets)))) atheists)))
             (coinModActualizer state owner
-                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))))
+                (int (- (* coinMod (/ 7 (+ 1 (state :pamphlets)))) atheists)) 0)))
         (if-not opt
-            ((om/update! state :coinMod (+ 1 coinMod))
+            ((om/update! state :coinMod (- (+ 1 coinMod) atheists))
             (om/update! state :coins
                 (- coins (+ 100 (* coinMod (* 50 coinMod)))))
-            (coinModActualizer state owner (+ coinMod 1))))))
+            (coinModActualizer state owner (- (+ 1 coinMod) atheists) 0)))))
+
+(defn atheistInc [state owner]
+    (om/update! state :atheists (inc (state :atheists)))
+    (coinModInc state owner "atheists"))
 
 (defn clickUPG [state owner]
     (let [{coinMod :coinMod coins :coins} state]
@@ -121,6 +128,7 @@
            churches :churches
            event :religiousEvents
            genSec :genSec} state]
+           (println (((om/get-state owner) :LocState) :genSec))
         (if (>= coins 150)
             ((om/update! state :clickers (+ 1 clickers))
             (om/update! state :coins (- coins 150))
@@ -238,7 +246,7 @@
          (let [chance (rand-int 100)]
             (if (<= chance (int (/ 50 (/ (inc (state :pamphlets)) 2))))
                 (coinModInc state owner "pamphlets")
-                (atheistInc state owner))))))
+                (coinModInc state owner "atheists"))))))
 
 (defn FreeDaysInc [state owner]
     (if (>= (state :coins) 3500)
@@ -267,6 +275,7 @@
            :freeDays 0
            :menu "true"
            :shop "Prists"
+           :menu2 "Prists"
            :genSec 0}))
 
 (defn change [coins owner]
@@ -282,8 +291,14 @@
 (defn displayPrists [state]
     (om/update! state :shop "Prists"))
 
+(defn displayPrists2 [state]
+    (om/update! state :menu2 "Prists"))
+
 (defn displayBuild [state]
     (om/update! state :shop "Buildings"))
+
+(defn displayBuild2 [state]
+    (om/update! state :menu2 "Buildings"))
 
 (defn displayShop [state]
     (om/update! state :menu (stateShop state)))
@@ -296,7 +311,7 @@
     (om/transact! state :coins
     (fn [coins]
         (let [ver ((om/get-state owner) :LocState)]
-        (+ coins (/ (ver :genSec) 1)))))
+        (+ coins (/ (ver :genSec) 20)))))
     (let [ver ((om/get-state owner) :LocState)]
         (if-not (= (ver :live) 0)
             ((println pula)
@@ -329,7 +344,7 @@
         om/IWillMount
         (will-mount [this]
             (js/setInterval
-                #(periodicly state owner) 1000))
+                #(periodicly state owner) 50))
         om/IRender
         (render [this]
         (dom/div #js
@@ -337,9 +352,11 @@
             (dom/div #js
                 {:className "col-md-4"}
                 (dom/p #js
-                    {:className "coinsGenerated"} (:coins state))
+                    {:className "coinsGenerated"} (int (:coins state)))
                 (dom/div #js
                     {:className "coinsSec"} "Coins/Sec: "(:genSec state))
+                (dom/div #js
+                    {:className "coinsSec"} "Atheists: "(:atheists state))
                 (dom/img #js
                     {:onClick (fn [e] (manualGen state))
                      :className "Generator"
@@ -374,8 +391,19 @@
                             "This is their belief power now: "
                             (state :coinMod))
                         (dom/div #js
-                                 {:className "MenuText"}
-                            "Here you have your army:")
+                            {:className "btn-group btn-extras"}
+                            (dom/button #js
+                                {:type "button"
+                                 :className "btn btn-default buttonColor"
+                                 :onClick (fn [e] (displayPrists2 state))} "Priests")
+                            (dom/button #js
+                                {:type "button"
+                                 :className "btn btn-default buttonColor"
+                                 :onClick (fn [e] (displayBuild2 state))}
+                                        "Buildings"))
+
+                        (if (= (state :menu2) "Prists")
+
                         (dom/div #js
                                  {:className "MenuText"}
                         (dom/div #js
@@ -383,6 +411,33 @@
                             (dom/img #js {:src "/img/Prist.png"
                                           :className "img"})
                                 "Priests " (state :clickers))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Archpriest.png"
+                                          :className "img"})
+                                "Archpriests " (state :archpriest))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Bishop.png"
+                                          :className "img"})
+                                "Bishops " (state :bishop))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Archbishop.png"
+                                          :className "img"})
+                                "Archbishops " (state :archbishop))
+                        (dom/div #js
+                                 {:className "construction"}
+                            (dom/img #js {:src "/img/Daniel.png"
+                                          :className "img"})
+                                "Patriarchs " (state :patriarh))))
+
+
+
+                        (if (= (state :menu2) "Buildings")
+
+                        (dom/div #js
+                                 {:className "MenuText"}
                         (dom/div #js
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Church.png"
@@ -402,7 +457,7 @@
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Patriarchate.png"
                                           :className "img"})
-                                "Patriarchates " (state :patriarchates))))
+                                "Patriarchates " (state :patriarchates)))))
 
                     (dom/div nil
                         (dom/div #js
