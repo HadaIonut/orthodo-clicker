@@ -20,6 +20,7 @@ cljs.core.cst$sym$defrecord_STAR_ = new cljs.core.Symbol(null,"defrecord*","defr
 cljs.core.cst$sym$base = new cljs.core.Symbol(null,"base","base",1825810849,null);
 cljs.core.cst$sym$obj = new cljs.core.Symbol(null,"obj","obj",-1672671807,null);
 cljs.core.cst$kw$finally = new cljs.core.Keyword(null,"finally","finally",1589088705);
+cljs.core.cst$sym$meta46053 = new cljs.core.Symbol(null,"meta46053","meta46053",-985365951,null);
 cljs.core.cst$sym$fqn = new cljs.core.Symbol(null,"fqn","fqn",-1749334463,null);
 cljs.core.cst$sym$Class = new cljs.core.Symbol(null,"Class","Class",2064526977,null);
 cljs.core.cst$sym$first = new cljs.core.Symbol(null,"first","first",996428481,null);

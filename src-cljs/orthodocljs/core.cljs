@@ -99,18 +99,18 @@
             (om/update! state :atheists (inc (state :atheists)))
             (coinModActualizer state owner coinMod 1)))
         (if (= opt "freeDays")
-            ((om/update! state :coinMod (int (- (* coinMod 2) atheists)))
-            (coinModActualizer state owner (int (- (* coinMod 2) atheists)) 0)))
+            ((om/update! state :coinMod (int (* coinMod 2)))
+            (coinModActualizer state owner (int (* coinMod 2)) 0)))
         (if (and (= opt "pamphlets") (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
             ((om/update! state :coinMod
-                (int (- (* coinMod (/ 7 (+ 1 (state :pamphlets)))) atheists)))
+                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))
             (coinModActualizer state owner
-                (int (- (* coinMod (/ 7 (+ 1 (state :pamphlets)))) atheists)) 0)))
+                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))) 0)))
         (if-not opt
-            ((om/update! state :coinMod (- (+ 1 coinMod) atheists))
+            ((om/update! state :coinMod (+ 1 coinMod))
             (om/update! state :coins
                 (- coins (+ 100 (* coinMod (* 50 coinMod)))))
-            (coinModActualizer state owner (- (+ 1 coinMod) atheists) 0)))))
+            (coinModActualizer state owner (+ 1 coinMod) 0)))))
 
 (defn atheistInc [state owner]
     (om/update! state :atheists (inc (state :atheists)))
