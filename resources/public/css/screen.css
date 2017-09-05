@@ -32,9 +32,22 @@ body {
   }
   .Generator{
 	  position: relative;
-	  top: 175px;
+	  top: 100px;
 	  width: 300px;
 	  height: 220px;
+  }
+  .Generator:hover{
+	position: relative;
+	top: 93px;
+	width: 305px;
+	height: 225px;
+  }
+  .Generator:active{
+	color: black;
+  	position: relative;
+  	top: 103px;
+  	width: 295px;
+  	height: 215px;
   }
   .coinsGenerated{
 	  font-size: 200%;
@@ -52,8 +65,6 @@ body {
   }
   .container1{
 	  padding-top: 10px;
-	  padding-left: 20px;
-	  padding-right: 20px;
   }
   .buttonColor{
 	  background-color:#939393;
@@ -80,7 +91,7 @@ body {
 	font: Arial;
   }
   .construction{
-	  width: 400px;
+	  width: 270px;
 	  height: 66px;
 	  background-color: #383838;
   }
@@ -125,5 +136,30 @@ body {
 	font: Arial;
   	text-align: left;
   }
+  .toltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted black;
+  }
 
+  .toltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 50%;
+      margin-left: -60px;
+  }
+
+  .toltip:hover .tooltiptext {
+      visibility: visible;
+  }
 }

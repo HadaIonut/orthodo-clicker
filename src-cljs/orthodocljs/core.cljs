@@ -1,8 +1,9 @@
-    (ns orthodocljs.core
+(ns orthodocljs.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [ajax.core :refer [GET POST]]
             [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
+            [orthodocljs.active :as act]
             [cljs.core.async :refer [put! chan poll! <! >!]]
             [clojure.string :as string]))
 
@@ -13,248 +14,12 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defn changeState [in owner live]
-    (if (= live 0)
-    (om/set-state! owner :LocState {:genSec in
-                                    :live (((om/get-state owner) :LocState)
-                                                                 :live)
-                                    :trigger (((om/get-state owner) :LocState)
-                                                                    :trigger)})
-    (om/set-state! owner :LocState {:genSec in
-                                    :live live
-                                    :trigger (((om/get-state owner) :LocState)
-                                                                    :trigger)})))
-(defn coinModActualizer [state owner inc ath]
-    (println inc)
-    (let [{coinMod :coinMod
-           coins :coins
-           clickers :clickers
-           archpriest :archpriest
-           bishop :bishop
-           archbishop :archbishop
-           patriarh :patriarh
-           churches :churches
-           shrines :shrines
-           event :religiousEvents
-           cathedrals :cathedrals
-           patriarchates :patriarchates
-           atheists :atheists
-           genSec :genSec} state]
-
-    (om/update! state :genSec (* (- (+ (* inc clickers)
-                                        (* inc (* archpriest 5))
-                                        (* inc (* bishop 10))
-                                        (* inc (* archbishop 15))
-                                        (* inc (* patriarh 20))
-                                        (* inc (* churches 15))
-                                        (* inc (* shrines 10))
-                                        (* inc (* cathedrals 20))
-                                        (* inc (* patriarchates 30))) ath)
-                                event))
-    (changeState (* (- (+ (* inc clickers)
-                        (* inc (* archpriest 5))
-                        (* inc (* bishop 10))
-                        (* inc (* archbishop 15))
-                        (* inc (* patriarh 20))
-                        (* inc (* shrines 10))
-                        (* inc (* cathedrals 20))
-                        (* inc (* patriarchates 30))
-                        (* inc churches)) ath) event) owner 0)))
-
 (defn handler [response]
   (.log js/console (str response)))
 
 (defn error-handler [{:keys [status status-text]}]
   (.log js/console (str "something bad happened: " status " " status-text)))
 
-(defn add [state]
-    (let [{coins :coins coinMod :coinMod} state]
-        (+ coinMod coins)))
-
-(defn stateMenu [state]
-    (let [{menu :menu} state]
-        (string/replace menu #"false" "true")))
-
-(defn stateShop [state]
-    (let [{menu :menu} state]
-        (string/replace menu #"true" "false")))
-
-(defn coinModInc [state owner & [opt]]
-    (let [{coinMod :coinMod
-           coins :coins
-           clickers :clickers
-           archpriest :archpriest
-           bishop :bishop
-           archbishop :archbishop
-           patriarh :patriarh
-           churches :churches
-           shrines :shrines
-           atheists :atheists
-           event :religiousEvents
-           cathedrals :cathedrals
-           patriarchates :patriarchates
-           genSec :genSec} state]
-        (if (= opt "atheists")
-            ((om/update! state :coinMod (dec coinMod))
-            (om/update! state :atheists (inc (state :atheists)))
-            (coinModActualizer state owner coinMod 1)))
-        (if (= opt "freeDays")
-            ((om/update! state :coinMod (int (* coinMod 2)))
-            (coinModActualizer state owner (int (* coinMod 2)) 0)))
-        (if (and (= opt "pamphlets") (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
-            ((om/update! state :coinMod
-                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))
-            (coinModActualizer state owner
-                (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))) 0)))
-        (if-not opt
-            ((om/update! state :coinMod (+ 1 coinMod))
-            (om/update! state :coins
-                (- coins (+ 100 (* coinMod (* 50 coinMod)))))
-            (coinModActualizer state owner (+ 1 coinMod) 0)))))
-
-(defn atheistInc [state owner]
-    (om/update! state :atheists (inc (state :atheists)))
-    (coinModInc state owner "atheists"))
-
-(defn clickUPG [state owner]
-    (let [{coinMod :coinMod coins :coins} state]
-        (if (>= coins (+ 100 (* coinMod (* 50 coinMod))))
-            (coinModInc state owner))))
-
-(defn clickerInc [state owner]
-    (let [{clickers :clickers
-           coins :coins
-           coinMod :coinMod
-           churches :churches
-           event :religiousEvents
-           genSec :genSec} state]
-           (println (((om/get-state owner) :LocState) :genSec))
-        (if (>= coins 150)
-            ((om/update! state :clickers (+ 1 clickers))
-            (om/update! state :coins (- coins 150))
-            (om/update! state :genSec (+ genSec (* coinMod event)))
-            (changeState (+ genSec (* coinMod event)) owner 0)))))
-
-(defn ArchpriestInc [state owner]
-    (let [{archpriest :archpriest
-           coins :coins
-           coinMod :coinMod
-           event :religiousEvents
-           genSec :genSec} state]
-    (if (>= coins 150)
-        ((om/update! state :archpriest (+ 1 archpriest))
-         (om/update! state :coins (- coins 150))
-         (om/update! state :genSec (+ genSec (* coinMod 5 event)))
-         (changeState (+ genSec (* coinMod 5 event)) owner 0)))))
-
-(defn BishopInc [state owner]
-    (let [{bishop :bishop
-           coins :coins
-           coinMod :coinMod
-           event :religiousEvents
-           genSec :genSec} state]
-    (if (>= coins 150)
-        ((om/update! state :bishop (+ 1 bishop))
-         (om/update! state :coins (- coins 150))
-         (om/update! state :genSec (+ genSec (* coinMod 10 event)))
-         (changeState (+ genSec (* coinMod 10 event)) owner 0)))))
-
-(defn ArchbishopInc [state owner]
-     (let [{archbishop :archbishop
-            coins :coins
-            coinMod :coinMod
-            event :religiousEvents
-            genSec :genSec} state]
-     (if (>= coins 150)
-         ((om/update! state :archbishop (+ 1 archbishop))
-          (om/update! state :coins (- coins 150))
-          (om/update! state :genSec (+ genSec (* coinMod 15 event)))
-          (changeState (+ genSec (* coinMod 15 event)) owner 0)))))
-
-(defn PatriarhsInc [state owner]
-    (let [{patriarh :patriarh
-           coins :coins
-           coinMod :coinMod
-           event :religiousEvents
-           genSec :genSec} state]
-    (if (>= coins 150)
-        ((om/update! state :patriarh (+ 1 patriarh))
-         (om/update! state :coins (- coins 150))
-         (om/update! state :genSec (+ genSec (* coinMod 20 event)))
-         (changeState (+ genSec (* coinMod 20 event)) owner 0)))))
-
-
-(defn churchesInc [state owner]
-    (let [{clickers :clickers
-           coins :coins
-           coinMod :coinMod
-           churches :churches
-           event :religiousEvents
-           genSec :genSec} state]
-        (if (>= coins 3500)
-            ((om/update! state :churches (+ 1 churches))
-             (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 15 event)))
-             (changeState (+ genSec (* coinMod 15 event)) owner 0)))))
-
-(defn shrineInc [state owner]
-    (let [{shrines :shrines
-           coins :coins
-           event :religiousEvents
-           genSec :genSec
-           coinMod :coinMod} state]
-        (if (>= coins 3500)
-            ((om/update! state :shrines (+ 1 shrines))
-             (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 10 event)))
-             (changeState (+ genSec (* coinMod 10 event)) owner 0)))))
-
-(defn cathedralInc [state owner]
-    (let [{cathedrals :cathedrals
-           coins :coins
-           genSec :genSec
-           event :religiousEvents
-           coinMod :coinMod} state]
-        (if (>= coins 3500)
-            ((om/update! state :cathedrals (+ 1 cathedrals))
-             (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 20 event)))
-             (changeState (+ genSec (* coinMod 20 event)) owner 0)))))
-
-(defn patriarchateInc [state owner]
-    (let [{patriarchates :patriarchates
-                coins :coins
-               genSec :genSec
-               event :religiousEvents
-              coinMod :coinMod} state]
-        (if (>= coins 3500)
-            ((om/update! state :patriarchates (+ 1 patriarchates))
-             (om/update! state :coins (- coins 3500))
-             (om/update! state :genSec (+ genSec (* coinMod 30 event)))
-             (changeState (+ genSec (* coinMod 30 event)) owner 0)))))
-
-(defn ReligiousEventsInc [state owner]
-    (if (>= (state :coins) 1750)
-        ((om/update! state :reLock 0)
-         (om/update! state :coins (- (state :coins) 1750))
-         (changeState (state :genSec) owner 100))))
-
-(defn pamphletsInc [state owner]
-    (if (>= (state :coins) 3500)
-        ((om/update! state :coins (- (state :coins) 3500))
-         (om/update! state :pamphlets (+ 1 (state :pamphlets)))
-         (let [chance (rand-int 100)]
-            (if (<= chance (int (/ 50 (/ (inc (state :pamphlets)) 2))))
-                (coinModInc state owner "pamphlets")
-                (coinModInc state owner "atheists"))))))
-
-(defn FreeDaysInc [state owner]
-    (if (>= (state :coins) 3500)
-        ((om/update! state :coins (- (state :coins) 3500))
-         (om/update! state :freeDays (+ 1 (state :freeDays)))
-         (let [chance (rand-int 100)]
-            (if (<= chance 50)
-                (coinModInc state owner "freeDays"))))))
 
 (defonce app-state
     (atom {:coins 1500000
@@ -283,10 +48,10 @@
         (+ coins Mod)))
 
 (defn manualGen [state]
-    (om/update! state :coins (add state)))
+    (om/update! state :coins (act/add state)))
 
 (defn displayManu [state]
-    (om/update! state :menu (stateMenu state)))
+    (om/update! state :menu (act/stateMenu state)))
 
 (defn displayPrists [state]
     (om/update! state :shop "Prists"))
@@ -301,7 +66,7 @@
     (om/update! state :menu2 "Buildings"))
 
 (defn displayShop [state]
-    (om/update! state :menu (stateShop state)))
+    (om/update! state :menu (act/stateShop state)))
 
 (defn displayExtras [state]
     (om/update! state :shop "Extras"))
@@ -350,7 +115,7 @@
         (dom/div #js
             {:className "col-md-12"}
             (dom/div #js
-                {:className "col-md-4"}
+                {:className "col-md-3"}
                 (dom/p #js
                     {:className "coinsGenerated"} (int (:coins state)))
                 (dom/div #js
@@ -363,10 +128,10 @@
                      :src "/img/OrthodoCoin.png"}))
 
             (dom/div #js
-                {:className "col-md-2"})
+                {:className "col-md-4"})
 
             (dom/div #js
-                {:className "col-md-6 btn-poz"}
+                {:className "col-md-5 btn-poz"}
             (dom/div #js
                 {:className "btn-group btn-extras"}
                 (dom/button #js
@@ -391,17 +156,22 @@
                             "This is their belief power now: "
                             (state :coinMod))
                         (dom/div #js
-                            {:className "btn-group btn-extras"}
+                            {:className "btn-group btn-extras col-md-2"}
                             (dom/button #js
                                 {:type "button"
-                                 :className "btn btn-default buttonColor"
+                                 :className "btn btn-default
+                                             btnColor ShopText2"
                                  :onClick (fn [e] (displayPrists2 state))} "Priests")
                             (dom/button #js
                                 {:type "button"
-                                 :className "btn btn-default buttonColor"
+                                 :className "btn btn-default
+                                             btnColor ShopText2"
                                  :onClick (fn [e] (displayBuild2 state))}
                                         "Buildings"))
 
+                        (dom/div #js {:className "col-md-2"})
+
+                        (dom/div #js {:className "col-md-4"}
                         (if (= (state :menu2) "Prists")
 
                         (dom/div #js
@@ -457,7 +227,7 @@
                                  {:className "construction"}
                             (dom/img #js {:src "/img/Patriarchate.png"
                                           :className "img"})
-                                "Patriarchates " (state :patriarchates)))))
+                                "Patriarchates " (state :patriarchates))))))
 
                     (dom/div nil
                         (dom/div #js
@@ -495,7 +265,7 @@
                         (dom/div nil
                         (dom/div nil
                             (dom/button #js
-                                {:onClick (fn [e] (clickUPG state owner))
+                                {:onClick (fn [e] (act/clickUPG state owner))
                                  :className "buy ShopText"}
                                         "Upgrade Belief Power: "
                             (let [{coinMod :coinMod} state]
@@ -503,7 +273,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (clickerInc state owner))
+                                            (act/clickerInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Prist.png"
                                               :className "imgShop"})
@@ -511,7 +281,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (ArchpriestInc state owner))
+                                            (act/ArchpriestInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Archpriest.png"
                                               :className "imgShop"})
@@ -519,7 +289,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (BishopInc state owner))
+                                            (act/BishopInc state owner))
                                          :className "buy ShopText"}
                                  (dom/img #js {:src "/img/Bishop.png"
                                                :className "imgShop"})
@@ -527,7 +297,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                             (ArchbishopInc state owner))
+                                             (act/ArchbishopInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Archbishop.png"
                                               :className "imgShop"})
@@ -535,7 +305,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                             (PatriarhsInc state owner))
+                                             (act/PatriarhsInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Daniel.png"
                                               :className "imgShop"})
@@ -547,7 +317,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (churchesInc state owner))
+                                            (act/churchesInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Church.png"
                                               :className "imgShop2"})
@@ -555,7 +325,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (shrineInc state owner))
+                                            (act/shrineInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js
                                          {:src "/img/Shrine.png"
@@ -564,7 +334,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (cathedralInc state owner))
+                                            (act/cathedralInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js
                                          {:src "/img/Cathedral.png"
@@ -573,7 +343,7 @@
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                            (patriarchateInc state owner))
+                                            (act/patriarchateInc state owner))
                                          :className "buy ShopText"}
                                 (dom/img #js
                                          {:src "/img/Patriarchate.png"
@@ -585,22 +355,23 @@
                     (dom/div nil
                         (dom/div nil
                             (if (= (state :reLock) 10)
-                            (dom/div nil
+                            (dom/div #js {:className "toltip"}
                                 (dom/button #js
                                             {:onClick (fn [e]
-                                                (ReligiousEventsInc state owner))
+                                                (act/ReligiousEventsInc state owner))
                                              :className "buy ShopText"}
-                                    "Add Religious events: 1750"))))
+                                    "Add Religious events: 1750")
+                                (dom/span #js {:className "tooltiptext"} "heya"))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                                  (pamphletsInc state owner))
+                                                  (act/pamphletsInc state owner))
                                          :className "buy ShopText"}
                                     "Send pamphlets: 3500"))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
-                                                  (FreeDaysInc state owner))
+                                                  (act/FreeDaysInc state owner))
                                          :className "buy ShopText"}
                                     "Get Free Days from work: 3500")))))))))))))
 
