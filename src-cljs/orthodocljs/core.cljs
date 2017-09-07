@@ -332,10 +332,10 @@
                                           :className "imgShop2"})
                                     "Buy Shrines: 3500"))
                         (dom/div nil
-                            (dom/button #js
-                                        {:onClick (fn [e]
-                                            (act/cathedralInc state owner))
-                                         :className "buy ShopText"}
+                            (dom/button
+                                #js {:onClick (fn [e]
+                                         (act/cathedralInc state owner))
+                                     :className "buy ShopText"}
                                 (dom/img #js
                                          {:src "/img/Cathedral.png"
                                           :className "imgShop2"})
@@ -361,19 +361,30 @@
                                                 (act/ReligiousEventsInc state owner))
                                              :className "buy ShopText"}
                                     "Add Religious events: 1750")
-                                (dom/span #js {:className "tooltiptext"} "heya"))))
-                        (dom/div nil
+                                (dom/span #js {:className "tooltiptext"}
+                                    "Adds a chance to start a religious event
+                                        that doubles coins/sec for a while"))))
+                        (dom/div #js {:className "toltip"}
                             (dom/button #js
                                         {:onClick (fn [e]
                                                   (act/pamphletsInc state owner))
                                          :className "buy ShopText"}
-                                    "Send pamphlets: 3500"))
-                        (dom/div nil
+                                    "Send pamphlets: 3500")
+                            (dom/span #js {:className "tooltiptext"}
+                                "Sending pamphlets has a chance to increase
+                                people's belief power but it can also make
+                                more atheists (more pamphlets may attract more
+                                                atheists)"))
+                        (dom/div #js {:className "toltip"}
                             (dom/button #js
                                         {:onClick (fn [e]
                                                   (act/FreeDaysInc state owner))
                                          :className "buy ShopText"}
-                                    "Get Free Days from work: 3500")))))))))))))
+                                    "Get Free Days from work: 3500")
+                            (dom/span #js {:className "tooltiptext"}
+                                "Free days could increase people's belief power,
+                                chances of that happening will decrease with
+                                every day added")))))))))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})

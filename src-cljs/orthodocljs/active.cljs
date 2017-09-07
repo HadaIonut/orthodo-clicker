@@ -84,6 +84,7 @@
            genSec :genSec} state]
     (if (= opt "atheists")
         ((om/update! state :coinMod (dec coinMod))
+        (om/update! state :coins (- (state :coins) 3500))
         (om/update! state :atheists (inc (state :atheists)))
         (coinModActualizer state owner coinMod 1)))
     (if (= opt "freeDays")
@@ -92,13 +93,14 @@
     (if (and (= opt "pamphlets") (<= 1 (int (/ 7 (+ 1 (state :pamphlets))))))
         ((om/update! state :coinMod
             (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))))
+        (om/update! state :coins (- (state :coins) 3500))
         (coinModActualizer state owner
             (int (* coinMod (/ 7 (+ 1 (state :pamphlets))))) 0)))
-        (if-not opt
-            ((om/update! state :coinMod (+ 1 coinMod))
-            (om/update! state :coins
-                (- coins (+ 100 (* coinMod (* 50 coinMod)))))
-            (coinModActualizer state owner (+ 1 coinMod) 0)))))
+    (if-not opt
+        ((om/update! state :coinMod (+ 1 coinMod))
+        (om/update! state :coins
+            (- coins (+ 100 (* coinMod (* 50 coinMod)))))
+        (coinModActualizer state owner (+ 1 coinMod) 0)))))
 
 (defn atheistInc [state owner]
     (om/update! state :atheists (inc (state :atheists)))
