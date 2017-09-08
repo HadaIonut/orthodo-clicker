@@ -119,9 +119,10 @@
            event :religiousEvents
            genSec :genSec} state]
        (println (((om/get-state owner) :LocState) :genSec))
-    (if (>= coins 150)
+    (if (>= coins (+ 150 (* 50 (state :clickers) (state :clickers))))
         ((om/update! state :clickers (+ 1 clickers))
-        (om/update! state :coins (- coins 150))
+        (om/update! state :coins (- coins (+ 150 (* 50 (state :clickers)
+                                                       (state :clickers)))))
         (om/update! state :genSec (+ genSec (* coinMod event)))
         (changeState (+ genSec (* coinMod event)) owner 0)))))
 
@@ -131,9 +132,10 @@
            coinMod :coinMod
            event :religiousEvents
            genSec :genSec} state]
-    (if (>= coins 150)
+    (if (>= coins (+ 450 (* 50 (state :archpriest) (state :archpriest))))
         ((om/update! state :archpriest (+ 1 archpriest))
-         (om/update! state :coins (- coins 150))
+         (om/update! state :coins (- coins (+ 450 (* 50 (state :archpriest)
+                                                        (state :archpriest)))))
          (om/update! state :genSec (+ genSec (* coinMod 5 event)))
          (changeState (+ genSec (* coinMod 5 event)) owner 0)))))
 
@@ -143,9 +145,10 @@
            coinMod :coinMod
            event :religiousEvents
            genSec :genSec} state]
-    (if (>= coins 150)
+    (if (>= coins (+ 1070 (* 78 (state :bishop) (state :bishop))))
         ((om/update! state :bishop (+ 1 bishop))
-         (om/update! state :coins (- coins 150))
+         (om/update! state :coins (- coins (+ 1070 (* 78 (state :bishop)
+                                                         (state :bishop)))))
          (om/update! state :genSec (+ genSec (* coinMod 10 event)))
          (changeState (+ genSec (* coinMod 10 event)) owner 0)))))
 
@@ -155,9 +158,10 @@
            coinMod :coinMod
            event :religiousEvents
            genSec :genSec} state]
-     (if (>= coins 150)
+     (if (>= coins (+ 2570 (* 162 (state :archbishop) (state :archbishop))))
          ((om/update! state :archbishop (+ 1 archbishop))
-          (om/update! state :coins (- coins 150))
+          (om/update! state :coins (- coins (+ 2570 (* 162 (state :archbishop)
+                                                        (state :archbishop)))))
           (om/update! state :genSec (+ genSec (* coinMod 15 event)))
           (changeState (+ genSec (* coinMod 15 event)) owner 0)))))
 
@@ -167,9 +171,10 @@
            coinMod :coinMod
            event :religiousEvents
            genSec :genSec} state]
-    (if (>= coins 150)
+    (if (>= coins (+ 5394 (* 462 (state :patriarh) (state :patriarh))))
         ((om/update! state :patriarh (+ 1 patriarh))
-         (om/update! state :coins (- coins 150))
+         (om/update! state :coins (- coins (+ 5394 (* 462 (state :patriarh)
+                        (state :patriarh))) ))
          (om/update! state :genSec (+ genSec (* coinMod 20 event)))
          (changeState (+ genSec (* coinMod 20 event)) owner 0)))))
 
@@ -181,9 +186,10 @@
            churches :churches
            event :religiousEvents
            genSec :genSec} state]
-    (if (>= coins 3500)
+    (if (>= coins (+ 3500 (* 762 (state :churches) (state :churches))))
         ((om/update! state :churches (+ 1 churches))
-         (om/update! state :coins (- coins 3500))
+         (om/update! state :coins (- coins (+ 3500 (* 762 (state :churches)
+                                                          (state :churches)))))
          (om/update! state :genSec (+ genSec (* coinMod 15 event)))
          (changeState (+ genSec (* coinMod 15 event)) owner 0)))))
 
@@ -193,9 +199,10 @@
            event :religiousEvents
            genSec :genSec
            coinMod :coinMod} state]
-    (if (>= coins 3500)
+    (if (>= coins (+ 6700 (* 862 (state :shrines) (state :shrines))))
         ((om/update! state :shrines (+ 1 shrines))
-         (om/update! state :coins (- coins 3500))
+         (om/update! state :coins (- coins (+ 6700 (* 862 (state :shrines)
+                                                          (state :shrines)))))
          (om/update! state :genSec (+ genSec (* coinMod 10 event)))
          (changeState (+ genSec (* coinMod 10 event)) owner 0)))))
 
@@ -205,9 +212,10 @@
            genSec :genSec
            event :religiousEvents
            coinMod :coinMod} state]
-    (if (>= coins 3500)
+    (if (>= coins (+ 8800 (* 1362 (state :cathedrals) (state :cathedrals))))
         ((om/update! state :cathedrals (+ 1 cathedrals))
-         (om/update! state :coins (- coins 3500))
+         (om/update! state :coins (- coins (+ 8800 (* 1362 (state :cathedrals)
+                                                         (state :cathedrals)))))
          (om/update! state :genSec (+ genSec (* coinMod 20 event)))
          (changeState (+ genSec (* coinMod 20 event)) owner 0)))))
 
@@ -217,9 +225,10 @@
            genSec :genSec
            event :religiousEvents
           coinMod :coinMod} state]
-    (if (>= coins 3500)
+    (if (>= coins (+ 13600 (* 1743 (state :patriarchates) (state :patriarchates))))
         ((om/update! state :patriarchates (+ 1 patriarchates))
-         (om/update! state :coins (- coins 3500))
+         (om/update! state :coins (- coins (+ 13600 (* 1743 (state :patriarchates)
+                                                        (state :patriarchates)))))
          (om/update! state :genSec (+ genSec (* coinMod 30 event)))
          (changeState (+ genSec (* coinMod 30 event)) owner 0)))))
 

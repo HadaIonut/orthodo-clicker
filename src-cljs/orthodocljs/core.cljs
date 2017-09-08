@@ -277,7 +277,9 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Prist.png"
                                               :className "imgShop"})
-                                "Buy Priests: 150" ))
+                                "Buy Priests: "
+                                (+ 150 (* 50 (state :clickers)
+                                             (state :clickers)))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
@@ -285,7 +287,9 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Archpriest.png"
                                               :className "imgShop"})
-                                "Buy Archpriests: 150" ))
+                                "Buy Archpriests: "
+                                (+ 450 (* 50 (state :archpriest)
+                                             (state :archpriest)))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
@@ -293,7 +297,9 @@
                                          :className "buy ShopText"}
                                  (dom/img #js {:src "/img/Bishop.png"
                                                :className "imgShop"})
-                                 "Buy Bishops: 150" ))
+                                 "Buy Bishops: "
+                                 (+ 1070 (* 78 (state :bishop)
+                                              (state :bishop)))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
@@ -301,7 +307,9 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Archbishop.png"
                                               :className "imgShop"})
-                                   "Buy Archbishops: 150" ))
+                                   "Buy Archbishops: "
+                                   (+ 2570 (* 162 (state :archbishop)
+                                                  (state :archbishop))) ))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
@@ -309,7 +317,9 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Daniel.png"
                                               :className "imgShop"})
-                                      "Buy Patriarchs: 150" ))))
+                                      "Buy Patriarchs: "
+                                      (+ 5394 (* 462 (state :patriarh)
+                                                     (state :patriarh))) ))))
 
                         (if (= (state :shop) "Buildings")
 
@@ -321,7 +331,9 @@
                                          :className "buy ShopText"}
                                 (dom/img #js {:src "/img/Church.png"
                                               :className "imgShop2"})
-                                "Buy Churches: 3500"))
+                                "Buy Churches: "
+                                (+ 3500 (* 762 (state :churches)
+                                               (state :churches)))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
@@ -330,7 +342,9 @@
                                 (dom/img #js
                                          {:src "/img/Shrine.png"
                                           :className "imgShop2"})
-                                    "Buy Shrines: 3500"))
+                                    "Buy Shrines: "
+                                    (+ 6700 (* 862 (state :shrines)
+                                                   (state :shrines)))))
                         (dom/div nil
                             (dom/button
                                 #js {:onClick (fn [e]
@@ -339,7 +353,9 @@
                                 (dom/img #js
                                          {:src "/img/Cathedral.png"
                                           :className "imgShop2"})
-                                    "Buy Cathedrals: 3500"))
+                                    "Buy Cathedrals: "
+                                    (+ 8800 (* 1362 (state :cathedrals)
+                                                    (state :cathedrals)))))
                         (dom/div nil
                             (dom/button #js
                                         {:onClick (fn [e]
@@ -348,7 +364,9 @@
                                 (dom/img #js
                                          {:src "/img/Patriarchate.png"
                                           :className "imgShop2"})
-                                    "Buy Patriarchate: 3500"))))
+                                    "Buy Patriarchate: "
+                                    (+ 13600 (* 1743 (state :patriarchates)
+                                                    (state :patriarchates)))))))
 
                         (if (= (state :shop) "Extras")
 
