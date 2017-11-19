@@ -3,19 +3,19 @@ goog.provide('om.util');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
 om.util.force_children = (function om$util$force_children(x){
-var G__31338 = x;
+var G__27691 = x;
 if(cljs.core.seq_QMARK_(x)){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1(om.util.force_children),G__31338);
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1(om.util.force_children),G__27691);
 } else {
-return G__31338;
+return G__27691;
 }
 });
 om.util.union_QMARK_ = (function om$util$union_QMARK_(expr){
-var expr__$1 = (function (){var G__31339 = expr;
+var expr__$1 = (function (){var G__27692 = expr;
 if(cljs.core.seq_QMARK_(expr)){
-return cljs.core.first(G__31339);
+return cljs.core.first(G__27692);
 } else {
-return G__31339;
+return G__27692;
 }
 })();
 return (cljs.core.map_QMARK_(expr__$1)) && (cljs.core.map_QMARK_(cljs.core.second(cljs.core.first(expr__$1))));
@@ -42,8 +42,8 @@ if(cljs.core.map_QMARK_(expr)){
 return cljs.core.ffirst(expr);
 } else {
 if(cljs.core.seq_QMARK_(expr)){
-var G__31340 = cljs.core.first(expr);
-return (om.util.join_key.cljs$core$IFn$_invoke$arity$1 ? om.util.join_key.cljs$core$IFn$_invoke$arity$1(G__31340) : om.util.join_key.call(null,G__31340));
+var G__27693 = cljs.core.first(expr);
+return (om.util.join_key.cljs$core$IFn$_invoke$arity$1 ? om.util.join_key.cljs$core$IFn$_invoke$arity$1(G__27693) : om.util.join_key.call(null,G__27693));
 } else {
 return expr;
 
@@ -60,11 +60,11 @@ om.util.recursion_QMARK_ = (function om$util$recursion_QMARK_(x){
 return (cljs.core.symbol_identical_QMARK_(cljs.core.cst$sym$$$$,x)) || (typeof x === 'number');
 });
 om.util.mutation_QMARK_ = (function om$util$mutation_QMARK_(expr){
-var expr__$1 = (function (){var G__31341 = expr;
+var expr__$1 = (function (){var G__27694 = expr;
 if(cljs.core.seq_QMARK_(expr)){
-return cljs.core.first(G__31341);
+return cljs.core.first(G__27694);
 } else {
-return G__31341;
+return G__27694;
 }
 })();
 return (expr__$1 instanceof cljs.core.Symbol);
