@@ -239,8 +239,9 @@
          (changeState (state :genSec) owner 100))))
 
 (defn pamphletsInc [state owner]
-    (if (>= (state :coins) 3500)
-        ((om/update! state :coins (- (state :coins) 3500))
+    (if (>= (state :coins) (+ 4000 (* 1576 (state :pamphlets) (state :pamphlets))))
+        ((om/update! state :coins (- (state :coins)
+          (+ 4000 (* 1576 (state :pamphlets) (state :pamphlets)))))
          (om/update! state :pamphlets (+ 1 (state :pamphlets)))
      (let [chance (rand-int 100)]
         (if (<= chance (int (/ 50 (/ (inc (state :pamphlets)) 2))))
@@ -248,8 +249,9 @@
             (coinModInc state owner "atheists"))))))
 
 (defn FreeDaysInc [state owner]
-    (if (>= (state :coins) 3500)
-        ((om/update! state :coins (- (state :coins) 3500))
+    (if (>= (state :coins) (+ 7500 (* 5839 (state :freeDays) (state :freeDays))))
+        ((om/update! state :coins (- (state :coins)
+          (+ 7500 (* 5839 (state :freeDays) (state :freeDays)))))
          (om/update! state :freeDays (+ 1 (state :freeDays)))
          (let [chance (rand-int 100)]
             (if (<= chance 50)

@@ -201,62 +201,77 @@
 (defn prists_shop [state owner]
   (dom/div nil
   (dom/div nil
-      (dom/button #js
+      (dom/div #js
           {:onClick (fn [e] (act/clickUPG state owner))
-           :className "buy ShopText"}
-                  "Upgrade Belief Power: "
-      (let [{coinMod :coinMod} state]
-          (+ 100 (* coinMod (* 50 coinMod))))))
+           :className "buy col-md-12"}
+           (dom/div nil
+           (dom/div #js {:className "ShopText col-md-10"}
+             "Upgrade Belief Power: "
+             (let [{coinMod :coinMod} state]
+               (+ 100 (* coinMod (* 50 coinMod)))))
+           (dom/div #js {:className "ShopText3 col-md-1"}
+             (state :coinMod)))))
   (dom/div nil
-      (dom/button #js
-                  {:onClick (fn [e]
-                      (act/clickerInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js {:src "/img/Prist.png"
-                        :className "imgShop"})
-          "Buy Priests: "
-          (+ 150 (* 50 (state :clickers)
-                       (state :clickers)))))
+      (dom/div #js
+                  {:onClick (fn [e] (act/clickerInc state owner))
+                   :className "buy col-md-12"}
+        (dom/div nil
+          (dom/div #js {:className "ShopText col-md-10"}
+            (dom/img #js {:src "/img/Prist.png"
+                          :className "imgShop"})
+            "Buy Priests: "
+            (+ 150 (* 50 (state :clickers) (state :clickers))))
+            (dom/div {:className "col-md-1"})
+          (dom/div #js {:className "ShopText3 col-md-1"}
+            (state :clickers)))))
   (dom/div nil
-      (dom/button #js
-                  {:onClick (fn [e]
-                      (act/ArchpriestInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js {:src "/img/Archpriest.png"
-                        :className "imgShop"})
-          "Buy Archpriests: "
-          (+ 450 (* 50 (state :archpriest)
-                       (state :archpriest)))))
+      (dom/div #js
+                  {:onClick (fn [e] (act/ArchpriestInc state owner))
+                   :className "buy col-md-12"}
+          (dom/div nil
+            (dom/div #js {:className "ShopText col-md-10"}
+              (dom/img #js {:src "/img/Archpriest.png"
+                            :className "imgShop"})
+              "Buy Archpriests: "
+              (+ 450 (* 50 (state :archpriest) (state :archpriest))))
+            (dom/div #js {:className "ShopText3 col-md-1"}
+              (state :archpriest)))))
   (dom/div nil
-      (dom/button #js
-                  {:onClick (fn [e]
-                      (act/BishopInc state owner))
-                   :className "buy ShopText"}
-           (dom/img #js {:src "/img/Bishop.png"
-                         :className "imgShop"})
+      (dom/div #js
+                  {:onClick (fn [e] (act/BishopInc state owner))
+                   :className "buy col-md-12"}
+           (dom/div nil
+             (dom/div #js {:className "ShopText col-md-10"}
+              (dom/img #js {:src "/img/Bishop.png"
+                            :className "imgShop"})
            "Buy Bishops: "
-           (+ 1070 (* 78 (state :bishop)
-                        (state :bishop)))))
+           (+ 1070 (* 78 (state :bishop) (state :bishop))))
+           (dom/div #js {:className "ShopText3 col-md-1"}
+             (state :bishop)))))
   (dom/div nil
-      (dom/button #js
-                  {:onClick (fn [e]
-                       (act/ArchbishopInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js {:src "/img/Archbishop.png"
-                        :className "imgShop"})
+      (dom/div #js
+                  {:onClick (fn [e] (act/ArchbishopInc state owner))
+                   :className "buy col-md-12"}
+          (dom/div nil
+           (dom/div #js {:className "ShopText col-md-10"}
+            (dom/img #js {:src "/img/Archbishop.png"
+                          :className "imgShop"})
              "Buy Archbishops: "
-             (+ 2570 (* 162 (state :archbishop)
-                            (state :archbishop))) ))
+             (+ 2570 (* 162 (state :archbishop) (state :archbishop))))
+             (dom/div #js {:className "ShopText3 col-md-1"}
+               (state :archbishop)))))
   (dom/div nil
-      (dom/button #js
-                  {:onClick (fn [e]
-                       (act/PatriarhsInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js {:src "/img/Daniel.png"
-                        :className "imgShop"})
+      (dom/div #js
+                  {:onClick (fn [e] (act/PatriarhsInc state owner))
+                   :className "buy col-md-12"}
+          (dom/div nil
+            (dom/div #js {:className "ShopText col-md-10"}
+              (dom/img #js {:src "/img/Daniel.png"
+                            :className "imgShop"})
                 "Buy Patriarchs: "
-                (+ 5394 (* 462 (state :patriarh)
-                               (state :patriarh))) ))))
+                (+ 5394 (* 462 (state :patriarh) (state :patriarh))))
+                (dom/div #js {:className "ShopText3 col-md-1"}
+                  (state :patriarh)))))))
 
 (defn buildings_shop [state owner]
   (dom/div nil
@@ -322,7 +337,8 @@
                       {:onClick (fn [e]
                                 (act/pamphletsInc state owner))
                        :className "buy ShopText"}
-                  "Send pamphlets: 3500")
+                  "Send pamphlets: "
+                  (+ 4000 (* 1576 (state :pamphlets) (state :pamphlets))))
           (dom/span #js {:className "tooltiptext"}
               "Sending pamphlets has a chance to increase
               people's belief power but it can also make
@@ -333,7 +349,8 @@
                       {:onClick (fn [e]
                                 (act/FreeDaysInc state owner))
                        :className "buy ShopText"}
-                  "Get Free Days from work: 3500")
+                  "Get Free Days from work: "
+                  (+ 7500 (* 5839 (state :freeDays) (state :freeDays))))
           (dom/span #js {:className "tooltiptext"}
               "Free days could increase people's belief power,
               chances of that happening will decrease with
@@ -342,7 +359,7 @@
 (defn shop-comp [state owner]
   (dom/div nil
       (dom/div #js
-          {:className "col-md-2"}
+          {:className "col-md-4"}
       (dom/div nil
           (dom/button #js
               {:type "button"
@@ -367,10 +384,10 @@
                         (displayExtras state))} "Extras")))
 
       (dom/div #js
-          {:className "col-md-2"})
+          {:className "col-md-0"})
 
       (dom/div #js
-          {:className "col-md-4"}
+          {:className "col-md-8"}
       (if (= (state :shop) "Prists")
         (prists_shop state owner))
 
@@ -417,10 +434,10 @@
             (button-comp state)
 
             (dom/div #js
-              {:className "col-md-4"})
+              {:className "col-md-3"})
 
             (dom/div #js
-              {:className "col-md-5 btn-poz"}
+              {:className "col-md-6 btn-poz"}
                 (rightmenu-comp state owner))))))
 
   (om/root root-comp app-state

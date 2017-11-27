@@ -97,12 +97,21 @@ body {
   }
   .ShopText{
   	font-weight: bold;
-  	font-size: 110%;
+  	font-size: 105%;
   	color: #e2e2e2;
   	text-shadow: 0.5px 2px #383838;
   	font: Arial;
 	text-align: left;
   }
+	.ShopText3{
+		font-weight: bold;
+		font-size: 110%;
+		color: #e2e2e2;
+		text-shadow: 0.5px 2px #383838;
+		font: Arial;
+		text-align: right;
+		left: 30px;
+	}
   .btn-extras{
 	  padding-bottom: 10px;
   }
@@ -111,7 +120,7 @@ body {
 	height: 63px;
 	position: relative;
 	top: 1px;
-	left: 5px;
+	left: -4px;
   }
   .imgShop2{
   	width: 63px;
@@ -120,7 +129,7 @@ body {
   	top: 1px;
   }
   .buy{
-	width: 350px;
+	width: 400px;
  	height: 68px;
   	background-color: #383838;
   }
@@ -162,4 +171,7 @@ body {
   .toltip:hover .tooltiptext {
       visibility: visible;
   }
+	.quantity{
+		text-align: right;
+	}
 }
