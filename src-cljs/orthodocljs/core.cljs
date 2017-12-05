@@ -113,97 +113,12 @@
            :className "Generator"
            :src "/img/OrthodoCoin.png"})))
 
-(defn menu-comp [state]
-  (dom/div nil
-      (dom/div #js
-               {:className "MenuText"}
-          "Increase people's belief power
-           to get more money!")
-      (dom/div #js
-               {:className "MenuText"}
-          "This is their belief power now: "
-          (state :coinMod))
-      (dom/div #js
-          {:className "btn-group btn-extras col-md-2"}
-          (dom/button #js
-              {:type "button"
-               :className "btn btn-default
-                           btnColor ShopText2"
-               :onClick (fn [e] (displayPrists2 state))}
-                        "Priests")
-          (dom/button #js
-              {:type "button"
-               :className "btn btn-default
-                           btnColor ShopText2"
-               :onClick (fn [e] (displayBuild2 state))}
-                      "Buildings"))
-
-      (dom/div #js {:className "col-md-2"})
-
-      (dom/div #js {:className "col-md-4"}
-      (if (= (state :menu2) "Prists")
-
-      (dom/div #js
-               {:className "MenuText"}
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Prist.png"
-                        :className "img"})
-              "Priests " (state :clickers))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Archpriest.png"
-                        :className "img"})
-              "Archpriests " (state :archpriest))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Bishop.png"
-                        :className "img"})
-              "Bishops " (state :bishop))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Archbishop.png"
-                        :className "img"})
-              "Archbishops " (state :archbishop))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Daniel.png"
-                        :className "img"})
-              "Patriarchs " (state :patriarh))))
-
-
-
-      (if (= (state :menu2) "Buildings")
-
-      (dom/div #js
-               {:className "MenuText"}
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Church.png"
-                        :className "img"})
-              "Churches " (state :churches))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Shrine.png"
-                        :className "img"})
-              "Shrines " (state :shrines))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Cathedral.png"
-                        :className "img"})
-              "Cathedrals " (state :cathedrals))
-      (dom/div #js
-               {:className "construction"}
-          (dom/img #js {:src "/img/Patriarchate.png"
-                        :className "img"})
-              "Patriarchates " (state :patriarchates)))))))
-
 (defn prists_shop [state owner]
   (dom/div nil
   (dom/div nil
       (dom/button #js
           {:onClick (fn [e] (act/clickUPG state owner))
-           :className "buy col-md-12"}
+           :className "buy col-md-12 btn-extras"}
            (dom/div nil
            (dom/div #js {:className "ShopText col-md-10"}
              "Upgrade Belief Power: "
@@ -367,35 +282,29 @@
 (defn shop-comp [state owner]
   (dom/div nil
       (dom/div #js
-          {:className "col-md-4"}
-      (dom/div nil
+          {:className "btn-group"
+           :role "group"}
           (dom/button #js
               {:type "button"
                :className "btn btn-default
                            btnColor ShopText2"
                :onClick (fn [e]
-                        (displayPrists state))} "Priests"))
-      (dom/div nil
+                        (displayPrists state))} "Priests")
           (dom/button #js
               {:type "button"
                :className "btn btn-default
                            btnColor ShopText2"
                :onClick (fn [e]
-                        (displayBuild state))} "Buildings"))
+                        (displayBuild state))} "Buildings")
 
-      (dom/div nil
           (dom/button #js
               {:type "button"
                :className "btn btn-default
                            btnColor ShopText2"
                :onClick (fn [e]
-                        (displayExtras state))} "Extras")))
+                        (displayExtras state))} "Extras"))
 
-      (dom/div #js
-          {:className "col-md-0"})
-
-      (dom/div #js
-          {:className "col-md-8"}
+      (dom/div nil
       (if (= (state :shop) "Prists")
         (prists_shop state owner))
 
@@ -404,25 +313,6 @@
 
       (if (= (state :shop) "Extras")
         (extras_shop state owner)))))
-
-(defn rightmenu-comp [state owner]
-  (dom/div nil
-    (dom/div #js
-        {:className "btn-group btn-extras"}
-        (dom/button #js
-            {:type "button"
-             :className "btn btn-default buttonColor"
-             :onClick (fn [e] (displayManu state))} "Menu")
-        (dom/button #js
-            {:type "button"
-             :className "btn btn-default buttonColor"
-             :onClick (fn [e] (displayShop state))}
-                    "Shop"))
-      (dom/div nil
-        (let [{menu :menu} state]
-          (if (= menu "true")
-            (menu-comp state)
-            (shop-comp state owner))))))
 
 (defn root-comp [state owner]
     (reify
@@ -442,11 +332,11 @@
             (button-comp state)
 
             (dom/div #js
-              {:className "col-md-3"})
+              {:className "col-md-4"})
 
             (dom/div #js
-              {:className "col-md-6 btn-poz"}
-                (rightmenu-comp state owner))))))
+              {:className "col-md-5 btn-poz"}
+                (shop-comp state owner))))))
 
   (om/root root-comp app-state
     {:target (. js/document (getElementById "Coins"))})
