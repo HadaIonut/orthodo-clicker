@@ -13,11 +13,11 @@ cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$c
 orthodocljs.core.handler = (function orthodocljs$core$handler(response){
 return console.log([cljs.core.str.cljs$core$IFn$_invoke$arity$1(response)].join(''));
 });
-orthodocljs.core.error_handler = (function orthodocljs$core$error_handler(p__36588){
-var map__36589 = p__36588;
-var map__36589__$1 = ((((!((map__36589 == null)))?((((map__36589.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__36589.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__36589):map__36589);
-var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__36589__$1,cljs.core.cst$kw$status);
-var status_text = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__36589__$1,cljs.core.cst$kw$status_DASH_text);
+orthodocljs.core.error_handler = (function orthodocljs$core$error_handler(p__29778){
+var map__29779 = p__29778;
+var map__29779__$1 = ((((!((map__29779 == null)))?((((map__29779.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__29779.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__29779):map__29779);
+var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__29779__$1,cljs.core.cst$kw$status);
+var status_text = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__29779__$1,cljs.core.cst$kw$status_DASH_text);
 return console.log([cljs.core.str.cljs$core$IFn$_invoke$arity$1("something bad happened: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(status),cljs.core.str.cljs$core$IFn$_invoke$arity$1(" "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(status_text)].join(''));
 });
 if(typeof orthodocljs.core.app_state !== 'undefined'){
@@ -56,62 +56,62 @@ orthodocljs.core.periodicly = (function orthodocljs$core$periodicly(state,owner)
 var pula = cljs.core.rand_int((300));
 om.core.transact_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$coins,((function (pula){
 return (function (coins){
-var ver = (function (){var G__36592 = cljs.core.cst$kw$LocState;
-var fexpr__36591 = om.core.get_state.cljs$core$IFn$_invoke$arity$1(owner);
-return (fexpr__36591.cljs$core$IFn$_invoke$arity$1 ? fexpr__36591.cljs$core$IFn$_invoke$arity$1(G__36592) : fexpr__36591.call(null,G__36592));
+var ver = (function (){var G__29782 = cljs.core.cst$kw$LocState;
+var fexpr__29781 = om.core.get_state.cljs$core$IFn$_invoke$arity$1(owner);
+return (fexpr__29781.cljs$core$IFn$_invoke$arity$1 ? fexpr__29781.cljs$core$IFn$_invoke$arity$1(G__29782) : fexpr__29781.call(null,G__29782));
 })();
-return (coins + ((function (){var G__36593 = cljs.core.cst$kw$genSec;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36593) : ver.call(null,G__36593));
+return (coins + ((function (){var G__29783 = cljs.core.cst$kw$genSec;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29783) : ver.call(null,G__29783));
 })() / (20)));
 });})(pula))
 );
 
-var ver = (function (){var G__36595 = cljs.core.cst$kw$LocState;
-var fexpr__36594 = om.core.get_state.cljs$core$IFn$_invoke$arity$1(owner);
-return (fexpr__36594.cljs$core$IFn$_invoke$arity$1 ? fexpr__36594.cljs$core$IFn$_invoke$arity$1(G__36595) : fexpr__36594.call(null,G__36595));
+var ver = (function (){var G__29785 = cljs.core.cst$kw$LocState;
+var fexpr__29784 = om.core.get_state.cljs$core$IFn$_invoke$arity$1(owner);
+return (fexpr__29784.cljs$core$IFn$_invoke$arity$1 ? fexpr__29784.cljs$core$IFn$_invoke$arity$1(G__29785) : fexpr__29784.call(null,G__29785));
 })();
-if(!(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36596 = cljs.core.cst$kw$live;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36596) : ver.call(null,G__36596));
+if(!(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29786 = cljs.core.cst$kw$live;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29786) : ver.call(null,G__29786));
 })(),(0)))){
-var G__36598 = cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36603 = cljs.core.cst$kw$trigger;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36603) : ver.call(null,G__36603));
+var G__29788 = cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29793 = cljs.core.cst$kw$trigger;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29793) : ver.call(null,G__29793));
 })()], 0));
-var G__36599 = cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36604 = cljs.core.cst$kw$live;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36604) : ver.call(null,G__36604));
+var G__29789 = cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29794 = cljs.core.cst$kw$live;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29794) : ver.call(null,G__29794));
 })()], 0));
-var G__36600 = (((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(pula,(5))) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36606 = cljs.core.cst$kw$trigger;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36606) : ver.call(null,G__36606));
-})(),(0))))?(function (){var G__36610 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$genSec,((function (){var G__36612 = cljs.core.cst$kw$genSec;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36612) : ver.call(null,G__36612));
+var G__29790 = (((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(pula,(5))) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29796 = cljs.core.cst$kw$trigger;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29796) : ver.call(null,G__29796));
+})(),(0))))?(function (){var G__29800 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$genSec,((function (){var G__29802 = cljs.core.cst$kw$genSec;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29802) : ver.call(null,G__29802));
 })() * (2)));
-var G__36611 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$religiousEvents,(2));
-var fexpr__36609 = om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,((function (){var G__36613 = cljs.core.cst$kw$genSec;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36613) : ver.call(null,G__36613));
-})() * (2)),cljs.core.cst$kw$live,(function (){var G__36614 = cljs.core.cst$kw$live;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36614) : ver.call(null,G__36614));
+var G__29801 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$religiousEvents,(2));
+var fexpr__29799 = om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,((function (){var G__29803 = cljs.core.cst$kw$genSec;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29803) : ver.call(null,G__29803));
+})() * (2)),cljs.core.cst$kw$live,(function (){var G__29804 = cljs.core.cst$kw$live;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29804) : ver.call(null,G__29804));
 })(),cljs.core.cst$kw$trigger,(1)], null));
-return (fexpr__36609.cljs$core$IFn$_invoke$arity$2 ? fexpr__36609.cljs$core$IFn$_invoke$arity$2(G__36610,G__36611) : fexpr__36609.call(null,G__36610,G__36611));
+return (fexpr__29799.cljs$core$IFn$_invoke$arity$2 ? fexpr__29799.cljs$core$IFn$_invoke$arity$2(G__29800,G__29801) : fexpr__29799.call(null,G__29800,G__29801));
 })():null);
-var G__36601 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36615 = cljs.core.cst$kw$trigger;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36615) : ver.call(null,G__36615));
-})(),(1)))?om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,(function (){var G__36616 = cljs.core.cst$kw$genSec;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36616) : ver.call(null,G__36616));
-})(),cljs.core.cst$kw$live,((function (){var G__36617 = cljs.core.cst$kw$live;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36617) : ver.call(null,G__36617));
+var G__29791 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29805 = cljs.core.cst$kw$trigger;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29805) : ver.call(null,G__29805));
+})(),(1)))?om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,(function (){var G__29806 = cljs.core.cst$kw$genSec;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29806) : ver.call(null,G__29806));
+})(),cljs.core.cst$kw$live,((function (){var G__29807 = cljs.core.cst$kw$live;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29807) : ver.call(null,G__29807));
 })() - (1)),cljs.core.cst$kw$trigger,(1)], null)):null);
-var G__36602 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36618 = cljs.core.cst$kw$live;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36618) : ver.call(null,G__36618));
-})(),(1)))?(function (){var G__36621 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$genSec,((function (){var G__36623 = cljs.core.cst$kw$genSec;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36623) : ver.call(null,G__36623));
+var G__29792 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29808 = cljs.core.cst$kw$live;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29808) : ver.call(null,G__29808));
+})(),(1)))?(function (){var G__29811 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$genSec,((function (){var G__29813 = cljs.core.cst$kw$genSec;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29813) : ver.call(null,G__29813));
 })() / (2)));
-var G__36622 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$religiousEvents,(1));
-var fexpr__36620 = om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,((function (){var G__36624 = cljs.core.cst$kw$genSec;
-return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__36624) : ver.call(null,G__36624));
+var G__29812 = om.core.update_BANG_.cljs$core$IFn$_invoke$arity$3(state,cljs.core.cst$kw$religiousEvents,(1));
+var fexpr__29810 = om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,((function (){var G__29814 = cljs.core.cst$kw$genSec;
+return (ver.cljs$core$IFn$_invoke$arity$1 ? ver.cljs$core$IFn$_invoke$arity$1(G__29814) : ver.call(null,G__29814));
 })() / (2)),cljs.core.cst$kw$live,(100),cljs.core.cst$kw$trigger,(0)], null));
-return (fexpr__36620.cljs$core$IFn$_invoke$arity$2 ? fexpr__36620.cljs$core$IFn$_invoke$arity$2(G__36621,G__36622) : fexpr__36620.call(null,G__36621,G__36622));
+return (fexpr__29810.cljs$core$IFn$_invoke$arity$2 ? fexpr__29810.cljs$core$IFn$_invoke$arity$2(G__29811,G__29812) : fexpr__29810.call(null,G__29811,G__29812));
 })():null);
-var fexpr__36597 = cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([pula], 0));
-return (fexpr__36597.cljs$core$IFn$_invoke$arity$5 ? fexpr__36597.cljs$core$IFn$_invoke$arity$5(G__36598,G__36599,G__36600,G__36601,G__36602) : fexpr__36597.call(null,G__36598,G__36599,G__36600,G__36601,G__36602));
+var fexpr__29787 = cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([pula], 0));
+return (fexpr__29787.cljs$core$IFn$_invoke$arity$5 ? fexpr__29787.cljs$core$IFn$_invoke$arity$5(G__29788,G__29789,G__29790,G__29791,G__29792) : fexpr__29787.call(null,G__29788,G__29789,G__29790,G__29791,G__29792));
 } else {
 return null;
 }
@@ -122,131 +122,139 @@ return orthodocljs.core.manualGen(state);
 }), "className": "Generator", "src": "/img/OrthodoCoin.png"}))], 0));
 });
 orthodocljs.core.menu_comp = (function orthodocljs$core$menu_comp(state){
-return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Increase people's belief power\n           to get more money!"], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["This is their belief power now: ",(function (){var G__36625 = cljs.core.cst$kw$coinMod;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36625) : state.call(null,G__36625));
+return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Increase people's belief power\n           to get more money!"], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["This is their belief power now: ",(function (){var G__29815 = cljs.core.cst$kw$coinMod;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29815) : state.call(null,G__29815));
 })()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "btn-group btn-extras col-md-2"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"type": "button", "className": "btn btn-default\n                           btnColor ShopText2", "onClick": (function (e){
 return orthodocljs.core.displayPrists2(state);
 })}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Priests"], 0)),om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"type": "button", "className": "btn btn-default\n                           btnColor ShopText2", "onClick": (function (e){
 return orthodocljs.core.displayBuild2(state);
-})}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Buildings"], 0))], 0)),om.dom.div(({"className": "col-md-2"})),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "col-md-4"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36626 = cljs.core.cst$kw$menu2;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36626) : state.call(null,G__36626));
-})(),"Prists"))?om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Prist.png", "className": "img"})),"Priests ",(function (){var G__36627 = cljs.core.cst$kw$clickers;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36627) : state.call(null,G__36627));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archpriest.png", "className": "img"})),"Archpriests ",(function (){var G__36628 = cljs.core.cst$kw$archpriest;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36628) : state.call(null,G__36628));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Bishop.png", "className": "img"})),"Bishops ",(function (){var G__36629 = cljs.core.cst$kw$bishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36629) : state.call(null,G__36629));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archbishop.png", "className": "img"})),"Archbishops ",(function (){var G__36630 = cljs.core.cst$kw$archbishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36630) : state.call(null,G__36630));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Daniel.png", "className": "img"})),"Patriarchs ",(function (){var G__36631 = cljs.core.cst$kw$patriarh;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36631) : state.call(null,G__36631));
-})()], 0))], 0)):null),((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36632 = cljs.core.cst$kw$menu2;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36632) : state.call(null,G__36632));
-})(),"Buildings"))?om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Church.png", "className": "img"})),"Churches ",(function (){var G__36633 = cljs.core.cst$kw$churches;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36633) : state.call(null,G__36633));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Shrine.png", "className": "img"})),"Shrines ",(function (){var G__36634 = cljs.core.cst$kw$shrines;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36634) : state.call(null,G__36634));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Cathedral.png", "className": "img"})),"Cathedrals ",(function (){var G__36635 = cljs.core.cst$kw$cathedrals;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36635) : state.call(null,G__36635));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Patriarchate.png", "className": "img"})),"Patriarchates ",(function (){var G__36636 = cljs.core.cst$kw$patriarchates;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36636) : state.call(null,G__36636));
+})}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Buildings"], 0))], 0)),om.dom.div(({"className": "col-md-2"})),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "col-md-4"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29816 = cljs.core.cst$kw$menu2;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29816) : state.call(null,G__29816));
+})(),"Prists"))?om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Prist.png", "className": "img"})),"Priests ",(function (){var G__29817 = cljs.core.cst$kw$clickers;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29817) : state.call(null,G__29817));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archpriest.png", "className": "img"})),"Archpriests ",(function (){var G__29818 = cljs.core.cst$kw$archpriest;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29818) : state.call(null,G__29818));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Bishop.png", "className": "img"})),"Bishops ",(function (){var G__29819 = cljs.core.cst$kw$bishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29819) : state.call(null,G__29819));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archbishop.png", "className": "img"})),"Archbishops ",(function (){var G__29820 = cljs.core.cst$kw$archbishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29820) : state.call(null,G__29820));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Daniel.png", "className": "img"})),"Patriarchs ",(function (){var G__29821 = cljs.core.cst$kw$patriarh;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29821) : state.call(null,G__29821));
+})()], 0))], 0)):null),((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29822 = cljs.core.cst$kw$menu2;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29822) : state.call(null,G__29822));
+})(),"Buildings"))?om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "MenuText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Church.png", "className": "img"})),"Churches ",(function (){var G__29823 = cljs.core.cst$kw$churches;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29823) : state.call(null,G__29823));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Shrine.png", "className": "img"})),"Shrines ",(function (){var G__29824 = cljs.core.cst$kw$shrines;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29824) : state.call(null,G__29824));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Cathedral.png", "className": "img"})),"Cathedrals ",(function (){var G__29825 = cljs.core.cst$kw$cathedrals;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29825) : state.call(null,G__29825));
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "construction"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Patriarchate.png", "className": "img"})),"Patriarchates ",(function (){var G__29826 = cljs.core.cst$kw$patriarchates;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29826) : state.call(null,G__29826));
 })()], 0))], 0)):null)], 0))], 0));
 });
 orthodocljs.core.prists_shop = (function orthodocljs$core$prists_shop(state,owner){
-return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.clickUPG(state,owner);
-}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Upgrade Belief Power: ",(function (){var map__36637 = state;
-var map__36637__$1 = ((((!((map__36637 == null)))?((((map__36637.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__36637.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__36637):map__36637);
-var coinMod = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__36637__$1,cljs.core.cst$kw$coinMod);
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Upgrade Belief Power: ",(function (){var map__29827 = state;
+var map__29827__$1 = ((((!((map__29827 == null)))?((((map__29827.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__29827.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__29827):map__29827);
+var coinMod = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__29827__$1,cljs.core.cst$kw$coinMod);
 return ((100) + (coinMod * ((50) * coinMod)));
-})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36639 = cljs.core.cst$kw$coinMod;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36639) : state.call(null,G__36639));
-})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+})()], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29829 = cljs.core.cst$kw$coinMod;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29829) : state.call(null,G__29829));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.clickerInc(state,owner);
-}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Prist.png", "className": "imgShop"})),"Buy Priests: ",((150) + (((50) * (function (){var G__36640 = cljs.core.cst$kw$clickers;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36640) : state.call(null,G__36640));
-})()) * (function (){var G__36641 = cljs.core.cst$kw$clickers;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36641) : state.call(null,G__36641));
-})()))], 0)),om.dom.div(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$className,"col-md-1"], null)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36642 = cljs.core.cst$kw$clickers;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36642) : state.call(null,G__36642));
-})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Prist.png", "className": "imgShop"})),"Buy Priests: ",((150) + (((50) * (function (){var G__29830 = cljs.core.cst$kw$clickers;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29830) : state.call(null,G__29830));
+})()) * (function (){var G__29831 = cljs.core.cst$kw$clickers;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29831) : state.call(null,G__29831));
+})()))], 0)),om.dom.div(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$className,"col-md-1"], null)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29832 = cljs.core.cst$kw$clickers;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29832) : state.call(null,G__29832));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.ArchpriestInc(state,owner);
-}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archpriest.png", "className": "imgShop"})),"Buy Archpriests: ",((450) + (((50) * (function (){var G__36643 = cljs.core.cst$kw$archpriest;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36643) : state.call(null,G__36643));
-})()) * (function (){var G__36644 = cljs.core.cst$kw$archpriest;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36644) : state.call(null,G__36644));
-})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36645 = cljs.core.cst$kw$archpriest;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36645) : state.call(null,G__36645));
-})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archpriest.png", "className": "imgShop"})),"Buy Archpriests: ",((450) + (((50) * (function (){var G__29833 = cljs.core.cst$kw$archpriest;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29833) : state.call(null,G__29833));
+})()) * (function (){var G__29834 = cljs.core.cst$kw$archpriest;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29834) : state.call(null,G__29834));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29835 = cljs.core.cst$kw$archpriest;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29835) : state.call(null,G__29835));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.BishopInc(state,owner);
-}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Bishop.png", "className": "imgShop"})),"Buy Bishops: ",((1070) + (((78) * (function (){var G__36646 = cljs.core.cst$kw$bishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36646) : state.call(null,G__36646));
-})()) * (function (){var G__36647 = cljs.core.cst$kw$bishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36647) : state.call(null,G__36647));
-})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36648 = cljs.core.cst$kw$bishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36648) : state.call(null,G__36648));
-})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Bishop.png", "className": "imgShop"})),"Buy Bishops: ",((1070) + (((78) * (function (){var G__29836 = cljs.core.cst$kw$bishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29836) : state.call(null,G__29836));
+})()) * (function (){var G__29837 = cljs.core.cst$kw$bishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29837) : state.call(null,G__29837));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29838 = cljs.core.cst$kw$bishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29838) : state.call(null,G__29838));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.ArchbishopInc(state,owner);
-}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archbishop.png", "className": "imgShop"})),"Buy Archbishops: ",((2570) + (((162) * (function (){var G__36649 = cljs.core.cst$kw$archbishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36649) : state.call(null,G__36649));
-})()) * (function (){var G__36650 = cljs.core.cst$kw$archbishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36650) : state.call(null,G__36650));
-})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36651 = cljs.core.cst$kw$archbishop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36651) : state.call(null,G__36651));
-})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Archbishop.png", "className": "imgShop"})),"Buy Archbishops: ",((2570) + (((162) * (function (){var G__29839 = cljs.core.cst$kw$archbishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29839) : state.call(null,G__29839));
+})()) * (function (){var G__29840 = cljs.core.cst$kw$archbishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29840) : state.call(null,G__29840));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29841 = cljs.core.cst$kw$archbishop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29841) : state.call(null,G__29841));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.PatriarhsInc(state,owner);
-}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Daniel.png", "className": "imgShop"})),"Buy Patriarchs: ",((5394) + (((462) * (function (){var G__36652 = cljs.core.cst$kw$patriarh;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36652) : state.call(null,G__36652));
-})()) * (function (){var G__36653 = cljs.core.cst$kw$patriarh;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36653) : state.call(null,G__36653));
-})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__36654 = cljs.core.cst$kw$patriarh;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36654) : state.call(null,G__36654));
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Daniel.png", "className": "imgShop"})),"Buy Patriarchs: ",((5394) + (((462) * (function (){var G__29842 = cljs.core.cst$kw$patriarh;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29842) : state.call(null,G__29842));
+})()) * (function (){var G__29843 = cljs.core.cst$kw$patriarh;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29843) : state.call(null,G__29843));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29844 = cljs.core.cst$kw$patriarh;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29844) : state.call(null,G__29844));
 })()], 0))], 0))], 0))], 0))], 0));
 });
 orthodocljs.core.buildings_shop = (function orthodocljs$core$buildings_shop(state,owner){
 return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.churchesInc(state,owner);
-}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Church.png", "className": "imgShop2"})),"Buy Churches: ",((3500) + (((762) * (function (){var G__36655 = cljs.core.cst$kw$churches;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36655) : state.call(null,G__36655));
-})()) * (function (){var G__36656 = cljs.core.cst$kw$churches;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36656) : state.call(null,G__36656));
-})()))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Church.png", "className": "imgShop2"})),"Buy Churches: ",((3500) + (((762) * (function (){var G__29845 = cljs.core.cst$kw$churches;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29845) : state.call(null,G__29845));
+})()) * (function (){var G__29846 = cljs.core.cst$kw$churches;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29846) : state.call(null,G__29846));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29847 = cljs.core.cst$kw$churches;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29847) : state.call(null,G__29847));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.shrineInc(state,owner);
-}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Shrine.png", "className": "imgShop2"})),"Buy Shrines: ",((6700) + (((862) * (function (){var G__36657 = cljs.core.cst$kw$shrines;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36657) : state.call(null,G__36657));
-})()) * (function (){var G__36658 = cljs.core.cst$kw$shrines;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36658) : state.call(null,G__36658));
-})()))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Shrine.png", "className": "imgShop2"})),"Buy Shrines: ",((6700) + (((862) * (function (){var G__29848 = cljs.core.cst$kw$shrines;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29848) : state.call(null,G__29848));
+})()) * (function (){var G__29849 = cljs.core.cst$kw$shrines;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29849) : state.call(null,G__29849));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29850 = cljs.core.cst$kw$shrines;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29850) : state.call(null,G__29850));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.cathedralInc(state,owner);
-}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Cathedral.png", "className": "imgShop2"})),"Buy Cathedrals: ",((8800) + (((1362) * (function (){var G__36659 = cljs.core.cst$kw$cathedrals;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36659) : state.call(null,G__36659));
-})()) * (function (){var G__36660 = cljs.core.cst$kw$cathedrals;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36660) : state.call(null,G__36660));
-})()))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Cathedral.png", "className": "imgShop2"})),"Buy Cathedrals: ",((8800) + (((1362) * (function (){var G__29851 = cljs.core.cst$kw$cathedrals;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29851) : state.call(null,G__29851));
+})()) * (function (){var G__29852 = cljs.core.cst$kw$cathedrals;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29852) : state.call(null,G__29852));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29853 = cljs.core.cst$kw$cathedrals;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29853) : state.call(null,G__29853));
+})()], 0))], 0))], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.patriarchateInc(state,owner);
-}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Patriarchate.png", "className": "imgShop2"})),"Buy Patriarchate: ",((13600) + (((1743) * (function (){var G__36661 = cljs.core.cst$kw$patriarchates;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36661) : state.call(null,G__36661));
-})()) * (function (){var G__36662 = cljs.core.cst$kw$patriarchates;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36662) : state.call(null,G__36662));
-})()))], 0))], 0))], 0));
+}), "className": "buy col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText col-md-10"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.img(({"src": "/img/Patriarchate.png", "className": "imgShop2"})),"Buy Patriarchate: ",((13600) + (((1743) * (function (){var G__29854 = cljs.core.cst$kw$patriarchates;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29854) : state.call(null,G__29854));
+})()) * (function (){var G__29855 = cljs.core.cst$kw$patriarchates;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29855) : state.call(null,G__29855));
+})()))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "ShopText3 col-md-1"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var G__29856 = cljs.core.cst$kw$patriarchates;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29856) : state.call(null,G__29856));
+})()], 0))], 0))], 0))], 0))], 0));
 });
 orthodocljs.core.extras_shop = (function orthodocljs$core$extras_shop(state,owner){
-return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36663 = cljs.core.cst$kw$reLock;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36663) : state.call(null,G__36663));
+return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29857 = cljs.core.cst$kw$reLock;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29857) : state.call(null,G__29857));
 })(),(10)))?om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "toltip"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.ReligiousEventsInc(state,owner);
 }), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Add Religious events: 1750"], 0)),om.dom.span.cljs$core$IFn$_invoke$arity$variadic(({"className": "tooltiptext"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Adds a chance to start a religious event\n                      that doubles coins/sec for a while"], 0))], 0)):null)], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "toltip"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.pamphletsInc(state,owner);
-}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Send pamphlets: ",((4000) + (((1576) * (function (){var G__36664 = cljs.core.cst$kw$pamphlets;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36664) : state.call(null,G__36664));
-})()) * (function (){var G__36665 = cljs.core.cst$kw$pamphlets;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36665) : state.call(null,G__36665));
+}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Send pamphlets: ",((4000) + (((1576) * (function (){var G__29858 = cljs.core.cst$kw$pamphlets;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29858) : state.call(null,G__29858));
+})()) * (function (){var G__29859 = cljs.core.cst$kw$pamphlets;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29859) : state.call(null,G__29859));
 })()))], 0)),om.dom.span.cljs$core$IFn$_invoke$arity$variadic(({"className": "tooltiptext"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Sending pamphlets has a chance to increase\n              people's belief power but it can also make\n              more atheists (more pamphlets may attract more\n                              atheists)"], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "toltip"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"onClick": (function (e){
 return orthodocljs.active.FreeDaysInc(state,owner);
-}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Get Free Days from work: ",((7500) + (((5839) * (function (){var G__36666 = cljs.core.cst$kw$freeDays;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36666) : state.call(null,G__36666));
-})()) * (function (){var G__36667 = cljs.core.cst$kw$freeDays;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36667) : state.call(null,G__36667));
+}), "className": "buy ShopText"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Get Free Days from work: ",((7500) + (((5839) * (function (){var G__29860 = cljs.core.cst$kw$freeDays;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29860) : state.call(null,G__29860));
+})()) * (function (){var G__29861 = cljs.core.cst$kw$freeDays;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29861) : state.call(null,G__29861));
 })()))], 0)),om.dom.span.cljs$core$IFn$_invoke$arity$variadic(({"className": "tooltiptext"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Free days could increase people's belief power,\n              chances of that happening will decrease with\n              every day added"], 0))], 0))], 0));
 });
 orthodocljs.core.shop_comp = (function orthodocljs$core$shop_comp(state,owner){
@@ -256,12 +264,12 @@ return orthodocljs.core.displayPrists(state);
 return orthodocljs.core.displayBuild(state);
 })}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Buildings"], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"type": "button", "className": "btn btn-default\n                           btnColor ShopText2", "onClick": (function (e){
 return orthodocljs.core.displayExtras(state);
-})}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Extras"], 0))], 0))], 0)),om.dom.div(({"className": "col-md-0"})),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "col-md-8"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36668 = cljs.core.cst$kw$shop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36668) : state.call(null,G__36668));
-})(),"Prists"))?orthodocljs.core.prists_shop(state,owner):null),((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36669 = cljs.core.cst$kw$shop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36669) : state.call(null,G__36669));
-})(),"Buildings"))?orthodocljs.core.buildings_shop(state,owner):null),((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__36670 = cljs.core.cst$kw$shop;
-return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__36670) : state.call(null,G__36670));
+})}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Extras"], 0))], 0))], 0)),om.dom.div(({"className": "col-md-0"})),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "col-md-8"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29862 = cljs.core.cst$kw$shop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29862) : state.call(null,G__29862));
+})(),"Prists"))?orthodocljs.core.prists_shop(state,owner):null),((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29863 = cljs.core.cst$kw$shop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29863) : state.call(null,G__29863));
+})(),"Buildings"))?orthodocljs.core.buildings_shop(state,owner):null),((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var G__29864 = cljs.core.cst$kw$shop;
+return (state.cljs$core$IFn$_invoke$arity$1 ? state.cljs$core$IFn$_invoke$arity$1(G__29864) : state.call(null,G__29864));
 })(),"Extras"))?orthodocljs.core.extras_shop(state,owner):null)], 0))], 0));
 });
 orthodocljs.core.rightmenu_comp = (function orthodocljs$core$rightmenu_comp(state,owner){
@@ -269,9 +277,9 @@ return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.c
 return orthodocljs.core.displayManu(state);
 })}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Menu"], 0)),om.dom.button.cljs$core$IFn$_invoke$arity$variadic(({"type": "button", "className": "btn btn-default buttonColor", "onClick": (function (e){
 return orthodocljs.core.displayShop(state);
-})}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Shop"], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var map__36671 = state;
-var map__36671__$1 = ((((!((map__36671 == null)))?((((map__36671.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__36671.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__36671):map__36671);
-var menu = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__36671__$1,cljs.core.cst$kw$menu);
+})}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["Shop"], 0))], 0)),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(null,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var map__29865 = state;
+var map__29865__$1 = ((((!((map__29865 == null)))?((((map__29865.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__29865.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__29865):map__29865);
+var menu = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__29865__$1,cljs.core.cst$kw$menu);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(menu,"true")){
 return orthodocljs.core.menu_comp(state);
 } else {
@@ -280,7 +288,7 @@ return orthodocljs.core.shop_comp(state,owner);
 })()], 0))], 0));
 });
 orthodocljs.core.root_comp = (function orthodocljs$core$root_comp(state,owner){
-if(typeof orthodocljs.core.t_orthodocljs$core36673 !== 'undefined'){
+if(typeof orthodocljs.core.t_orthodocljs$core29867 !== 'undefined'){
 } else {
 
 /**
@@ -291,73 +299,73 @@ if(typeof orthodocljs.core.t_orthodocljs$core36673 !== 'undefined'){
  * @implements {om.core.IInitState}
  * @implements {cljs.core.IWithMeta}
 */
-orthodocljs.core.t_orthodocljs$core36673 = (function (state,owner,meta36674){
+orthodocljs.core.t_orthodocljs$core29867 = (function (state,owner,meta29868){
 this.state = state;
 this.owner = owner;
-this.meta36674 = meta36674;
+this.meta29868 = meta29868;
 this.cljs$lang$protocol_mask$partition0$ = 393216;
 this.cljs$lang$protocol_mask$partition1$ = 0;
 });
-orthodocljs.core.t_orthodocljs$core36673.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_36675,meta36674__$1){
+orthodocljs.core.t_orthodocljs$core29867.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_29869,meta29868__$1){
 var self__ = this;
-var _36675__$1 = this;
-return (new orthodocljs.core.t_orthodocljs$core36673(self__.state,self__.owner,meta36674__$1));
+var _29869__$1 = this;
+return (new orthodocljs.core.t_orthodocljs$core29867(self__.state,self__.owner,meta29868__$1));
 });
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_36675){
+orthodocljs.core.t_orthodocljs$core29867.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_29869){
 var self__ = this;
-var _36675__$1 = this;
-return self__.meta36674;
+var _29869__$1 = this;
+return self__.meta29868;
 });
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.om$core$IInitState$ = cljs.core.PROTOCOL_SENTINEL;
+orthodocljs.core.t_orthodocljs$core29867.prototype.om$core$IInitState$ = cljs.core.PROTOCOL_SENTINEL;
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.om$core$IInitState$init_state$arity$1 = (function (_){
+orthodocljs.core.t_orthodocljs$core29867.prototype.om$core$IInitState$init_state$arity$1 = (function (_){
 var self__ = this;
 var ___$1 = this;
 return new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$LocState,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$genSec,(0),cljs.core.cst$kw$live,(0),cljs.core.cst$kw$trigger,(0)], null)], null);
 });
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.om$core$IWillMount$ = cljs.core.PROTOCOL_SENTINEL;
+orthodocljs.core.t_orthodocljs$core29867.prototype.om$core$IWillMount$ = cljs.core.PROTOCOL_SENTINEL;
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.om$core$IWillMount$will_mount$arity$1 = (function (this$){
+orthodocljs.core.t_orthodocljs$core29867.prototype.om$core$IWillMount$will_mount$arity$1 = (function (this$){
 var self__ = this;
 var this$__$1 = this;
-var G__36676 = ((function (this$__$1){
+var G__29870 = ((function (this$__$1){
 return (function (){
 return orthodocljs.core.periodicly(self__.state,self__.owner);
 });})(this$__$1))
 ;
-var G__36677 = (50);
-return setInterval(G__36676,G__36677);
+var G__29871 = (50);
+return setInterval(G__29870,G__29871);
 });
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.om$core$IRender$ = cljs.core.PROTOCOL_SENTINEL;
+orthodocljs.core.t_orthodocljs$core29867.prototype.om$core$IRender$ = cljs.core.PROTOCOL_SENTINEL;
 
-orthodocljs.core.t_orthodocljs$core36673.prototype.om$core$IRender$render$arity$1 = (function (this$){
+orthodocljs.core.t_orthodocljs$core29867.prototype.om$core$IRender$render$arity$1 = (function (this$){
 var self__ = this;
 var this$__$1 = this;
 return om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "col-md-12"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([orthodocljs.core.button_comp(self__.state),om.dom.div(({"className": "col-md-3"})),om.dom.div.cljs$core$IFn$_invoke$arity$variadic(({"className": "col-md-6 btn-poz"}),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([orthodocljs.core.rightmenu_comp(self__.state,self__.owner)], 0))], 0));
 });
 
-orthodocljs.core.t_orthodocljs$core36673.getBasis = (function (){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$state,cljs.core.cst$sym$owner,cljs.core.cst$sym$meta36674], null);
+orthodocljs.core.t_orthodocljs$core29867.getBasis = (function (){
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$state,cljs.core.cst$sym$owner,cljs.core.cst$sym$meta29868], null);
 });
 
-orthodocljs.core.t_orthodocljs$core36673.cljs$lang$type = true;
+orthodocljs.core.t_orthodocljs$core29867.cljs$lang$type = true;
 
-orthodocljs.core.t_orthodocljs$core36673.cljs$lang$ctorStr = "orthodocljs.core/t_orthodocljs$core36673";
+orthodocljs.core.t_orthodocljs$core29867.cljs$lang$ctorStr = "orthodocljs.core/t_orthodocljs$core29867";
 
-orthodocljs.core.t_orthodocljs$core36673.cljs$lang$ctorPrWriter = (function (this__22166__auto__,writer__22167__auto__,opt__22168__auto__){
-return cljs.core._write(writer__22167__auto__,"orthodocljs.core/t_orthodocljs$core36673");
+orthodocljs.core.t_orthodocljs$core29867.cljs$lang$ctorPrWriter = (function (this__22166__auto__,writer__22167__auto__,opt__22168__auto__){
+return cljs.core._write(writer__22167__auto__,"orthodocljs.core/t_orthodocljs$core29867");
 });
 
-orthodocljs.core.__GT_t_orthodocljs$core36673 = (function orthodocljs$core$root_comp_$___GT_t_orthodocljs$core36673(state__$1,owner__$1,meta36674){
-return (new orthodocljs.core.t_orthodocljs$core36673(state__$1,owner__$1,meta36674));
+orthodocljs.core.__GT_t_orthodocljs$core29867 = (function orthodocljs$core$root_comp_$___GT_t_orthodocljs$core29867(state__$1,owner__$1,meta29868){
+return (new orthodocljs.core.t_orthodocljs$core29867(state__$1,owner__$1,meta29868));
 });
 
 }
 
-return (new orthodocljs.core.t_orthodocljs$core36673(state,owner,cljs.core.PersistentArrayMap.EMPTY));
+return (new orthodocljs.core.t_orthodocljs$core29867(state,owner,cljs.core.PersistentArrayMap.EMPTY));
 });
 om.core.root(orthodocljs.core.root_comp,orthodocljs.core.app_state,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$target,document.getElementById("Coins")], null));

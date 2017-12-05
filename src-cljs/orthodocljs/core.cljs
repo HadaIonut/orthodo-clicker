@@ -201,7 +201,7 @@
 (defn prists_shop [state owner]
   (dom/div nil
   (dom/div nil
-      (dom/div #js
+      (dom/button #js
           {:onClick (fn [e] (act/clickUPG state owner))
            :className "buy col-md-12"}
            (dom/div nil
@@ -212,7 +212,7 @@
            (dom/div #js {:className "ShopText3 col-md-1"}
              (state :coinMod)))))
   (dom/div nil
-      (dom/div #js
+      (dom/button #js
                   {:onClick (fn [e] (act/clickerInc state owner))
                    :className "buy col-md-12"}
         (dom/div nil
@@ -225,7 +225,7 @@
           (dom/div #js {:className "ShopText3 col-md-1"}
             (state :clickers)))))
   (dom/div nil
-      (dom/div #js
+      (dom/button #js
                   {:onClick (fn [e] (act/ArchpriestInc state owner))
                    :className "buy col-md-12"}
           (dom/div nil
@@ -237,7 +237,7 @@
             (dom/div #js {:className "ShopText3 col-md-1"}
               (state :archpriest)))))
   (dom/div nil
-      (dom/div #js
+      (dom/button #js
                   {:onClick (fn [e] (act/BishopInc state owner))
                    :className "buy col-md-12"}
            (dom/div nil
@@ -249,7 +249,7 @@
            (dom/div #js {:className "ShopText3 col-md-1"}
              (state :bishop)))))
   (dom/div nil
-      (dom/div #js
+      (dom/button #js
                   {:onClick (fn [e] (act/ArchbishopInc state owner))
                    :className "buy col-md-12"}
           (dom/div nil
@@ -261,7 +261,7 @@
              (dom/div #js {:className "ShopText3 col-md-1"}
                (state :archbishop)))))
   (dom/div nil
-      (dom/div #js
+      (dom/button #js
                   {:onClick (fn [e] (act/PatriarhsInc state owner))
                    :className "buy col-md-12"}
           (dom/div nil
@@ -277,47 +277,55 @@
   (dom/div nil
   (dom/div nil
       (dom/button #js
-                  {:onClick (fn [e]
-                      (act/churchesInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js {:src "/img/Church.png"
-                        :className "imgShop2"})
+                  {:onClick (fn [e] (act/churchesInc state owner))
+                   :className "buy col-md-12"}
+        (dom/div nil
+          (dom/div #js {:className "ShopText col-md-10"}
+            (dom/img #js {:src "/img/Church.png"
+                          :className "imgShop2"})
           "Buy Churches: "
-          (+ 3500 (* 762 (state :churches)
-                         (state :churches)))))
+          (+ 3500 (* 762 (state :churches) (state :churches))))
+          (dom/div #js {:className "ShopText3 col-md-1"}
+            (state :churches)))))
   (dom/div nil
       (dom/button #js
-                  {:onClick (fn [e]
-                      (act/shrineInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js
-                   {:src "/img/Shrine.png"
-                    :className "imgShop2"})
+                  {:onClick (fn [e] (act/shrineInc state owner))
+                   :className "buy col-md-12"}
+        (dom/div nil
+          (dom/div #js {:className "ShopText col-md-10"}
+            (dom/img #js
+                    {:src "/img/Shrine.png"
+                     :className "imgShop2"})
               "Buy Shrines: "
-              (+ 6700 (* 862 (state :shrines)
-                             (state :shrines)))))
-  (dom/div nil
-      (dom/button
-          #js {:onClick (fn [e]
-                   (act/cathedralInc state owner))
-               :className "buy ShopText"}
-          (dom/img #js
-                   {:src "/img/Cathedral.png"
-                    :className "imgShop2"})
-              "Buy Cathedrals: "
-              (+ 8800 (* 1362 (state :cathedrals)
-                              (state :cathedrals)))))
+              (+ 6700 (* 862 (state :shrines) (state :shrines))))
+          (dom/div #js {:className "ShopText3 col-md-1"}
+            (state :shrines)))))
   (dom/div nil
       (dom/button #js
-                  {:onClick (fn [e]
-                      (act/patriarchateInc state owner))
-                   :className "buy ShopText"}
-          (dom/img #js
-                   {:src "/img/Patriarchate.png"
-                    :className "imgShop2"})
+                  {:onClick (fn [e] (act/cathedralInc state owner))
+                   :className "buy col-md-12"}
+        (dom/div nil
+          (dom/div #js {:className "ShopText col-md-10"}
+            (dom/img #js
+                    {:src "/img/Cathedral.png"
+                     :className "imgShop2"})
+              "Buy Cathedrals: "
+              (+ 8800 (* 1362 (state :cathedrals) (state :cathedrals))))
+          (dom/div #js {:className "ShopText3 col-md-1"}
+            (state :cathedrals)))))
+  (dom/div nil
+      (dom/button #js
+                  {:onClick (fn [e] (act/patriarchateInc state owner))
+                   :className "buy col-md-12"}
+        (dom/div nil
+          (dom/div #js {:className "ShopText col-md-10"}
+            (dom/img #js
+                     {:src "/img/Patriarchate.png"
+                      :className "imgShop2"})
               "Buy Patriarchate: "
-              (+ 13600 (* 1743 (state :patriarchates)
-                              (state :patriarchates)))))))
+              (+ 13600 (* 1743 (state :patriarchates) (state :patriarchates))))
+          (dom/div #js {:className "ShopText3 col-md-1"}
+            (state :patriarchates)))))))
 
 (defn extras_shop [state owner]
   (dom/div nil
